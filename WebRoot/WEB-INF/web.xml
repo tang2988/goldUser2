@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+  <servlet>
+  	<description>登录</description>
+    <servlet-name>UserLogin</servlet-name>
+    <servlet-class>cn.jbit.Servlet.UserLoginServlet</servlet-class>
+  </servlet>
+    <servlet-mapping>
+    <servlet-name>UserLogin</servlet-name>
+    <url-pattern>/userlogin/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <description>个人首页</description>
+    <servlet-name>HomeServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.HomeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HomeServlet</servlet-name>
+    <url-pattern>/home/*</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <description>实名</description>
+    <servlet-name>UserRealnameServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.UserRealnameServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserRealnameServlet</servlet-name>
+    <url-pattern>/userRealname/*</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <description>密码设置</description>
+    <servlet-name>UserpwdServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.UserpwdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserpwdServlet</servlet-name>
+    <url-pattern>/userpwd/*</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description>添加银行卡</description>
+    <servlet-name>UserCardServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.UserCardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserCardServlet</servlet-name>
+    <url-pattern>/usercard/*</url-pattern>
+  </servlet-mapping>
+</web-app>
