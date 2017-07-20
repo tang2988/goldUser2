@@ -26,6 +26,13 @@ public class UserpwdServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		User login = (User) request.getSession().getAttribute("login");
+		if(login == null){
+			response.sendRedirect("../userlogin/login.do");
+			return;
+		}
+		
 		String uri  =request.getRequestURI();  //定义路径
 		if(uri.endsWith("/userpwdd.do")){		//交易密码路径
 			request.getRequestDispatcher("/WEB-INF/Jsp/UserPassword.jsp").forward(request, response);
@@ -52,6 +59,12 @@ public class UserpwdServlet extends HttpServlet {
 		String ur = request.getRequestURI();
 		if(ur.endsWith("userpwd.do")){
 			
+			User login = (User) request.getSession().getAttribute("login");
+			if(login == null){
+				response.sendRedirect("../userlogin/login.do");
+				return;
+			}
+			
 			String trPassword = request.getParameter("trPassword"); //从页面表单组件名称获取提交的数据
 			String qrPassword = request.getParameter("qrPassword");	//从页面表单组件名称获取提交的数据
 			if(trPassword==null || trPassword.equals("")){ 	//如果等于null  重定向到 设置交易密码页面
@@ -63,7 +76,7 @@ public class UserpwdServlet extends HttpServlet {
 			}else{
 				User user = new User();		//实例化
 				user.setTransactionPwd(trPassword);
-				user.setUserId(1L);
+				user.setUserId(login.getUserId());
 				UserService us = new UserServiceImpl(); //实例化业务类
 				Integer xg = us.modifytheTradingPassword(user);	//调用修改方法
 				if(xg>0){
@@ -75,6 +88,12 @@ public class UserpwdServlet extends HttpServlet {
 			}
 			
 		}else if(ur.endsWith("update.do")){
+			
+			User login = (User) request.getSession().getAttribute("login");
+			if(login == null){
+				response.sendRedirect("../userlogin/login.do");
+				return;
+			}
 			
 			String password = request.getParameter("password");	//从页面表单组件名称获取提交的数据
 			String passwordone = request.getParameter("passwordone");	//从页面表单组件名称获取提交的数据
@@ -90,12 +109,17 @@ public class UserpwdServlet extends HttpServlet {
 				response.sendRedirect("../userpwd/updatepwd.do");
 			}else{
 				UserService us = new UserServiceImpl(); //实例化业务类
-				User cx = us.findPassword(password);	//调用查询方法
+				User uss = new User();
+				uss.setPassword(password);
+				User cx = us.findPassword(login.getUserId());	//调用查询方法
+				System.out.println(cx);
 				if(cx!=null){
+					
 					User user = new User();
-					user.setUserId(1L);
+					user.setUserId(login.getUserId());
 					user.setPassword(passwordone);
-					ResBo uo = us.UpdatePassword(user);
+					ResBo uo = us.updatePassword(user);
+					System.out.println(uo);
 					if(uo.getMsg()!=null){
 						request.setAttribute("uo", uo.getMsg()); //创建属性
 						request.getRequestDispatcher("/WEB-INF/Jsp/success.jsp").forward(request, response); //页面转发

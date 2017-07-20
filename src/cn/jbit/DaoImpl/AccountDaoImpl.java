@@ -76,6 +76,29 @@ public class AccountDaoImpl implements AccountDao{
 		return null;
 	}
 	
+	public Boolean Chongzhi(Account account){
+		
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			String sql = "UPDATE t_account SET Accountbalance =? where UserId = ?";
+			ps = con.prepareStatement(sql);
+			ps.setLong(1, account.getAccountbalance());
+			ps.setLong(2, account.getUserId());
+			
+			int ab = ps.executeUpdate();
+			ConnectionUtil.closeResource(con, ps, null);
+			if(ab>0){
+				return true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+		
+	}
+	
 	public static void main(String[] args) {
 		AccountDao accountDao = new AccountDaoImpl(); 
 		List<Account> aa = accountDao.findUser();

@@ -30,13 +30,13 @@ public class UserCardServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-			ResBo login = (ResBo) request.getSession().getAttribute("login");
+			User login = (User) request.getSession().getAttribute("login");
 			if(login == null){
 				response.sendRedirect("../userlogin/login.do");
 				return;
 			}
 		 	UserService userService = new UserServiceImpl();   //实例化业务层实现类
-		 	User na = userService.findNameId(1L);		//调用业务层的查询方法
+		 	User na = userService.findNameId(login.getUserId());		//调用业务层的查询方法
 		 	request.setAttribute("na", na);			//设置属性 
 		 	request.getRequestDispatcher("/WEB-INF/Jsp/UserCard.jsp").forward(request, response); //页面转发
 		 	
@@ -58,12 +58,11 @@ public class UserCardServlet extends HttpServlet {
 		String url = request.getRequestURI();   //定义访问路径
 		if(url.endsWith("user.do")){
 			
-			ResBo login = (ResBo) request.getSession().getAttribute("login");
+			User login = (User) request.getSession().getAttribute("login");
 			if(login == null){
 				response.sendRedirect("../userlogin/login.do");
 				return;
 			}
-			
 			//后缀以 user.do 结束  执行下面
 			String CardnoId = request.getParameter("CardnoId").trim();  //从页面表单组件名称获取提交的数据
 			if(CardnoId==null || CardnoId.equals("")){   //如果等于null 或者 相等"" 
@@ -73,8 +72,8 @@ public class UserCardServlet extends HttpServlet {
 				Bankcard bankcard = new Bankcard();		//实例化Bankcard
 				bankcard.setBankcardStatus(10);			//设置值
 				bankcard.setCard(Long.valueOf(CardnoId));
-				bankcard.setUserId(3L);
-				bankcard.setBanknameId("123123");
+				bankcard.setUserId(login.getUserId());
+				bankcard.setBanknameId(CardnoId);
 				ResBo tj = bankcardService.ins(bankcard);  //调用业务类的添加方法
 				if(tj.getMsg()!=null){		//判断
 					request.setAttribute("tj", tj.getMsg()); //创建属性 

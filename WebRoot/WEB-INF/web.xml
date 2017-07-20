@@ -47,8 +47,29 @@
     <servlet-name>UserCardServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.UserCardServlet</servlet-class>
   </servlet>
+
   <servlet-mapping>
     <servlet-name>UserCardServlet</servlet-name>
     <url-pattern>/usercard/*</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+     <description>提现</description>
+    <servlet-name>WithServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.WithServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WithServlet</servlet-name>
+    <url-pattern>/withtx/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+     <description>充值</description>
+    <servlet-name>ToppServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.ToppServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ToppServlet</servlet-name>
+    <url-pattern>/topp/*</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -59,7 +59,7 @@ public class UserLoginServlet extends HttpServlet {
 	 *             if an error occurred
 	 * @throws IOException
 	 *             if an error occurred
-	 */
+	 */ 
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -81,7 +81,7 @@ public class UserLoginServlet extends HttpServlet {
 			ResBo login = userService.login(user);
 			if (login.getMsg()!=null) {
 				HttpSession httpSession = request.getSession(); // 创建session
-				httpSession.setAttribute("login", login); // 创建属性值
+				httpSession.setAttribute("login", login.getData()); // 创建属性值
 				response.sendRedirect("../home/home.do"); // 重定向
 			} else {
 				response.sendRedirect("../userlogin/login.do");
@@ -95,14 +95,17 @@ public class UserLoginServlet extends HttpServlet {
 				response.sendRedirect("../userlogin/Register.do"); // 页面重定向
 				return; // 终止
 			}
-			// if(Pattern.compile("^[1-9]$").matcher(mobliePhone).find()){
-			// response.sendRedirect("../userlogin/Register.do");
-			// return;
-			// }
-			// if(Pattern.compile("^[1-9]$").matcher(Password).find()){
-			// response.sendRedirect("../userlogin/Register.do");
-			// return;
-			// }
+			System.out.println(mobliePhone);
+			 if(Pattern.compile("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$").matcher(mobliePhone).find()){
+			 
+			 }else{
+				 response.sendRedirect("../userlogin/Register.do");
+				 return;
+			 }
+			 if(!Pattern.compile("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$").matcher(Password).find()){
+			 response.sendRedirect("../userlogin/Register.do");
+			 return;
+			 }
 			User user = new User(); // 实例化
 			user.setMobilePhone(mobliePhone);
 			user.setPassword(Password);

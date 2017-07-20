@@ -34,7 +34,7 @@ public class UserDaoImpl implements UserDao {
 				us.setIdcardNo(rs.getString("idcardNo"));
 			}
 			ConnectionUtil.closeResource(con, ps, rs);
-			return user;
+			return us;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -156,25 +156,26 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	
-	public User findPassword(String Password){
+	public User findPassword(Long id){
 		
 		
 		try {
 			Connection con = ConnectionUtil.getConnection();
 			PreparedStatement ps = null;
 			ResultSet rs = null;
-			String sql = "SELECT Password from t_user WHERE Password = ?";
+			String sql = "SELECT Password from t_user WHERE UserId = ?";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, Password);
+			ps.setLong(1, id);
 			rs = ps.executeQuery();
-			User user = null;
+			User us = null;
 			while(rs.next()){
-				user = new User();
-				user.setPassword(rs.getString("Password"));
+				us = new User();
+				us.setPassword(rs.getString("Password"));
+
 				
 			}
 			ConnectionUtil.closeResource(con, ps, rs);
-			return user;
+			return us;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -198,15 +199,39 @@ public class UserDaoImpl implements UserDao {
 			}
 			return null;
 		}
+	
+	public User transactionPwd(Long uid){
+		
+		
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			String sql = "SELECT transactionPwd from t_user WHERE UserId = ?";
+			ps = con.prepareStatement(sql);
+			ps.setLong(1, uid);
+			rs = ps.executeQuery();
+			User us = null;
+			while(rs.next()){
+				us = new User();
+				us.setPassword(rs.getString("transactionPwd"));
+			}
+			ConnectionUtil.closeResource(con, ps, rs);
+			return us;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
 	public static void main(String[] args) {
 		UserDao ud = new UserDaoImpl();
 		User user = new User();
-		User aa = ud.login(user);
-		 
-		 
+		user.setUserId(2L);
 		
-//		boolean aa = ud.login("15012812811", "123123");
-		System.out.println(aa);
+		 User aa = ud.transactionPwd(2L);
+		 
+System.out.println(aa);
 	}
 
 

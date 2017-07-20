@@ -16,9 +16,11 @@ public interface UserDao {
 	
 	public User getMobliePhone(String mobilePhone);
 	
-	public User findPassword(String Password);
+	public User findPassword(Long id);
 	
 	public Integer UpdatePassword(User user);
+	
+	public User transactionPwd(Long uid);
 	
 	
 

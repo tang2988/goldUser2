@@ -53,11 +53,16 @@ public interface UserService {
 	 * @param userId
 	 * @return
 	 */
-	public User findPassword(String Password);
+	public User findPassword(Long id);
 	/**
 	 * 修改登录密码
 	 * @param user
 	 * @return
 	 */
-	public ResBo UpdatePassword(User user);
+	public ResBo updatePassword(User user);
+	
+	/**
+	 * 根据ID查询交易密码
+	 */
+	public User transactionPwd(Long uid);
 }

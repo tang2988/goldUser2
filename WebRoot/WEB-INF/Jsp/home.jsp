@@ -59,8 +59,7 @@
 					<td><h2>现金账户</h2>
 							<dl>
 								<dt>账户余额(元)${ac.accountbalance}</dt>
-							</dl> <input type="button" value="转入金荷包生意" /> <input type="button"
-							src="" value="充值" /> <a href="withdrawalform.jsp">提现</a>
+							</dl> <input type="button" value="转入金荷包生意" /> <a href="topp/">充值</a><br/><a href="withtx/tixian.do">提现</a>
 					</td>	
 					<td><h2>黄金资产</h2>
 									<dl>

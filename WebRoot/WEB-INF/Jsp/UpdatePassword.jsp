@@ -62,10 +62,7 @@
       <input type="submit" value="提交" class="name1"/>
 	</form>
 	
-</div>
-							 
-							 
-							 
+</div>	 
 						</td>
 					</tr>
 				

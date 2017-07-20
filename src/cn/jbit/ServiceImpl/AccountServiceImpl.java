@@ -17,4 +17,9 @@ public class AccountServiceImpl implements AccountService {
 		return accountDao.findAccount(UserId);
 	}
 
+	@Override
+	public Boolean Recharge(Account account) {
+		return accountDao.Chongzhi(account);
+	}
+
 }

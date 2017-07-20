@@ -11,10 +11,10 @@ public class UserServiceImpl implements UserService {
 	UserDao dao = new UserDaoImpl();
 	public ResBo login(User user){
 		ResBo res = new ResBo();
-		User aa = dao.login(user);
-		if(aa!=null){
+		User user2 = dao.login(user);
+		if(user2!=null){
 			res.setMsg("登录成功");
-			res.setData(user);
+			res.setData(user2);
 			return res;
 		}else{
 			res.setMsg("用户名密码错误");
@@ -67,22 +67,23 @@ public class UserServiceImpl implements UserService {
 		return dao.getMobliePhone(mobilePhone);
 	}
 
-	public User findPassword(String Password) {
-		return dao.findPassword(Password);
+	public User findPassword(Long id) {
+		return dao.findPassword(id);
 	}
 
-	public ResBo UpdatePassword(User user) {
+	public ResBo updatePassword(User user) {
 		ResBo resBo = new ResBo();
-		 User pwd = dao.findPassword(user.getPassword());  //调用查询方法 获取密码
-		if(pwd!=null){
-			resBo.setMsg("密码修改成功");
+		 User pwd = dao.findPassword(user.getUserId());  //调用查询方法 获取密码
+		if(pwd==null){
+			resBo.setMsg("原密码错误");
+			resBo.setData(pwd);
 			return resBo;
 		}
 		Integer aa = dao.UpdatePassword(user);  			//调用修改密码方法
 		 if(aa>0){
 			 resBo.setSuccess(true); 
 			 resBo.setMsg("密码修改成功");	//修改成功后提示
-			 resBo.setData(user);	//返回对象
+			 resBo.setData(aa);	//返回对象
 		 }else{
 			 resBo.setMsg("修改失败");
 		 }
@@ -92,10 +93,16 @@ public class UserServiceImpl implements UserService {
 	public static void main(String[] args) {
 		UserService us = new UserServiceImpl();
 		User user = new User();
-		user.setMobilePhone("15012812811");
-		user.setPassword("157");
-		ResBo aa = us.login(user);
+		user.setUserId(1L);
+		user.setPassword("789789");
+		 ResBo aa = us.updatePassword(user);
 		System.out.println(aa);
 
 	}
+
+	public User transactionPwd(Long uid) {
+		
+		return dao.transactionPwd(uid);
+	}
+
 }

@@ -34,14 +34,14 @@ public class HomeServlet extends HttpServlet {
 				
 				//后缀以 home.do结尾 就执行 下面的内容
 				
-				ResBo login = (ResBo) request.getSession().getAttribute("login");
+				User login = (User) request.getSession().getAttribute("login");
 				if(login == null){
 					response.sendRedirect("../userlogin/login.do");
 					return;
 				}
 				AccountService accountService = new AccountServiceImpl(); //实例化  业务层
-				
-				Account ac = accountService.findAccount(1L);	//调用方法
+				System.out.println(login);
+				Account ac = accountService.findAccount(login.getUserId());	//调用方法
 				request.setAttribute("ac", ac);		//设置属性值
 				request.getRequestDispatcher("/WEB-INF/Jsp/home.jsp").forward(request, response); //页面转发
 				return;  //终止

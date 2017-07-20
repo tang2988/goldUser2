@@ -17,5 +17,12 @@ public interface AccountService {
 	 * @return
 	 */
 	public Account findAccount(Long UserId);
+	
+	/**
+	 * 充值提现
+	 * @param account
+	 * @return
+	 */
+	public Boolean Recharge(Account account);
 
 }

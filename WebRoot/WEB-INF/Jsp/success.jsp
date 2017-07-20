@@ -27,5 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     ${uo}<a href="userpwd/userpwdd.do">返回</a><br/>
     ${tj}<a href="usercard/user.do">返回</a>
     ${cx.BanknameId }---${cx.card }---
+    ${tx}<a href="withtx/tixian.do">返回提现页面</a>
+    ${cz}<a href="topp/top.do">返回充值页面</a>
   </body>
 </html>

@@ -26,26 +26,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <form action="usercard/user.do" method="post">
 <table align="center">
 		<tr>
-        	<td><table>
-               <tr>
-               	<td width="800px">
-               <img src="http://image.so.com/v?q=图片&cmsid=ca8e1" />上午好，账户安全
-              	 </td>
-              	 <td>实时金价:元/克</td>    
-               </tr>
-               <tr>
-                   <td><a href="userRealname/reanl.do">实名认证</a>
-                    <a href="userpwd/userpwdd.do">密码设置</a>
-                     <a href="usercard/user.do">我的银行卡</a>
-                   </td>
-               </tr>
-                </table></td>
+        	<td><%@include file="123.jsp" %></td>
         </tr>
         
 		<tr>
 			<td><table>
 				<tr>
-					<td width="20%"><a href="#">账户总览</a><br />
+					<td width="20%" ><a href="#">账户总览</a><br />
                 	<a href="#">黄金资产</a><br />
               		 <a href="#">我的订单</a><br />
                		 <a href="#">资金明细</a><br />
