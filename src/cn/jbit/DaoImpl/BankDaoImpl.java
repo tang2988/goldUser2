@@ -11,7 +11,7 @@ import cn.jbit.entity.Bankcard;
 
 public class BankDaoImpl implements BankDao {
 
-	public Integer ins(Bankcard bankcard) {
+	public Bankcard ins(Bankcard bankcard) {
 		
 		try {
 			Connection con = ConnectionUtil.getConnection();
@@ -25,8 +25,16 @@ public class BankDaoImpl implements BankDao {
 			ps.setInt(3, bankcard.getBankcardStatus());
 			ps.setLong(4, bankcard.getUserId());
 			int up = ps.executeUpdate();
+			ResultSet rs = null;
+			PreparedStatement pss = null;
+			String sql2 = "select bankcardId from t_bankcard order by bankcardId desc limit 1";
+			pss = con.prepareStatement(sql2);
+			rs = pss.executeQuery();
+			while(rs.next()){
+				bankcard.setBankcardId(rs.getLong("bankcardId"));
+			}
 			ConnectionUtil.closeResource(con, ps, null);
-			return up;
+			return bankcard;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

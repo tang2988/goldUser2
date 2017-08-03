@@ -18,8 +18,8 @@ public class BankcardServiceImpl implements BankcardService {
 			resBo.setData(bankcard); //返回对象
 			return resBo;
 		}
-		Integer zc = bankDao.ins(bankcard);  //调用 添加方法
-		if(zc>0){  
+		 Bankcard zc = bankDao.ins(bankcard);  //调用 添加方法
+		if(zc!=null){  
 			resBo.setMsg("绑定成功"); //大于0就绑定成功
 			resBo.setData(bankcard); //返回对象
 			return resBo;

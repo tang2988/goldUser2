@@ -12,6 +12,6 @@ public interface AccountDao {
 	
 	public Account findAccount(Long UserId);
 	
-	public Boolean Chongzhi(Account account);
+	public Boolean JianKuan(Account account);
 	
 }

@@ -76,7 +76,7 @@ public class AccountDaoImpl implements AccountDao{
 		return null;
 	}
 	
-	public Boolean Chongzhi(Account account){
+	public Boolean JianKuan(Account account){
 		
 		try {
 			Connection con = ConnectionUtil.getConnection();

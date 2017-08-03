@@ -4,6 +4,6 @@ import cn.jbit.entity.Withdrawalform;
 
 public interface WithdrawalformDao {
 	
-	public Integer insert(Withdrawalform withdrawalform);
+	public Withdrawalform insert(Withdrawalform withdrawalform);
 
 }

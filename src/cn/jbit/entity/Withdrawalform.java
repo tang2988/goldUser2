@@ -1,12 +1,13 @@
 package cn.jbit.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Withdrawalform {
 	
 	public Long withdrawalId;
 	public Integer rechargeStatus;
-	public Long withdrawdMoneny;
+	public BigDecimal withdrawdMoneny;
 	public Date applyfortime;
 	public Date succeedtime;
 	public Date errortime;
@@ -25,10 +26,10 @@ public class Withdrawalform {
 	public void setRechargeStatus(Integer rechargeStatus) {
 		this.rechargeStatus = rechargeStatus;
 	}
-	public Long getWithdrawdMoneny() {
+	public BigDecimal getWithdrawdMoneny() {
 		return withdrawdMoneny;
 	}
-	public void setWithdrawdMoneny(Long withdrawdMoneny) {
+	public void setWithdrawdMoneny(BigDecimal withdrawdMoneny) {
 		this.withdrawdMoneny = withdrawdMoneny;
 	}
 	public Date getApplyfortime() {

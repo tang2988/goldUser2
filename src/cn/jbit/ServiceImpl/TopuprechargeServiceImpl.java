@@ -1,5 +1,6 @@
 package cn.jbit.ServiceImpl;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import cn.jbit.Dao.AccountDao;
@@ -19,20 +20,22 @@ public class TopuprechargeServiceImpl implements TopuprechargeService{
 	public ResBo rechargeRecord(Topuprecharge topuprecharge) {
 		ResBo resBo = new ResBo();
 		//保存充值的记录
-		Integer count = topuprechargeDao.rechargeRecord(topuprecharge);
-		if(count>0){
+		 Topuprecharge count = topuprechargeDao.rechargeRecord(topuprecharge);
+		if(count!=null){
 			
 			//获取用户的数据
 			Account account = accountDao.findAccount(topuprecharge.getUserId()); //调用查询方法 根据用户ID查询 
 			
 			//获取当前余额
 			Long ye = account.getAccountbalance();
+			BigDecimal aa = topuprecharge.getRecharmoney();
+			Long lg = new Long(aa.longValue());
 			
 			//余额赋值
-			account.setAccountbalance(ye + topuprecharge.getRecharmoney()); //当前余额+充值余额
+			account.setAccountbalance(ye + lg); //当前余额+充值余额
 			
 			//更新账户数据
-			Boolean bl = accountDao.Chongzhi(account);
+			Boolean bl = accountDao.JianKuan(account);
 			if(bl){
 				resBo.setSuccess(true);
 				resBo.setMsg("充值金额成功"); //成功提示
@@ -50,7 +53,7 @@ public class TopuprechargeServiceImpl implements TopuprechargeService{
 		Topuprecharge tp = new Topuprecharge();
 		tp.setRechargeStatus(10);
 		tp.setRechargeTime(new Date());
-		tp.setRecharmoney(10000);
+		tp.setRecharmoney(new BigDecimal(10000));
 		tp.setSucceedTime(new Date());
 		tp.setBanklistId(1L);
 		tp.setUserId(1L);

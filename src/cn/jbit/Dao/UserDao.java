@@ -6,7 +6,9 @@ public interface UserDao {
 	
 	public User login(User user);
 	
-	public Integer Zhuce(User user);
+	public User findUserById(Long userId);
+	
+	public User Zhuce(User user);
 	
 	public Integer Update(User user);
 	
@@ -21,6 +23,8 @@ public interface UserDao {
 	public Integer UpdatePassword(User user);
 	
 	public User transactionPwd(Long uid);
+	
+	public User getpassword(String password);
 	
 	
 

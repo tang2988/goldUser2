@@ -4,7 +4,7 @@ import cn.jbit.entity.Bankcard;
 
 public interface BankDao {
 	
-	public Integer ins(Bankcard bankcard);
+	public Bankcard ins(Bankcard bankcard);
 	
 	public Bankcard findBankcard(Bankcard bankcard);
 	

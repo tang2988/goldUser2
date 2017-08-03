@@ -2,6 +2,7 @@ package cn.jbit.Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -104,7 +105,7 @@ public class ToppServlet extends HttpServlet {
 				tp.setRechargeStatus(10);
 				tp.setRechargeTime(new Date());
 				tp.setSucceedTime(new Date());
-				tp.setRecharmoney(Integer.valueOf(czmonery));
+				tp.setRecharmoney(new BigDecimal(czmonery));
 				tp.setBanklistId(Long.valueOf(raid));
 				tp.setUserId(login.getUserId());
 				

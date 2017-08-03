@@ -1,12 +1,13 @@
 package cn.jbit.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class Topuprecharge {
 	
 	public Long rechargeId;
 	public Long UserId;
-	public Integer recharmoney;
+	public BigDecimal recharmoney;
 	public  Date rechargeTime;
 	public Integer rechargeStatus;
 	public Date succeedTime;
@@ -27,10 +28,10 @@ public class Topuprecharge {
 	public void setUserId(Long userId) {
 		UserId = userId;
 	}
-	public Integer getRecharmoney() {
+	public BigDecimal getRecharmoney() {
 		return recharmoney;
 	}
-	public void setRecharmoney(Integer recharmoney) {
+	public void setRecharmoney(BigDecimal recharmoney) {
 		this.recharmoney = recharmoney;
 	}
 	public Date getRechargeTime() {

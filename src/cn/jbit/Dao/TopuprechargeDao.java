@@ -4,6 +4,6 @@ import cn.jbit.entity.Topuprecharge;
 
 public interface TopuprechargeDao {
 	
-	public Integer rechargeRecord(Topuprecharge topuprecharge);
+	public Topuprecharge rechargeRecord(Topuprecharge topuprecharge);
 
 }

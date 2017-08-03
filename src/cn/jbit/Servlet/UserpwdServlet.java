@@ -108,38 +108,20 @@ public class UserpwdServlet extends HttpServlet {
 			}else if(!passwordone.equals(passwordtwo)){				//2次密码不一样 重定向到修改密码页面
 				response.sendRedirect("../userpwd/updatepwd.do");
 			}else{
-				UserService us = new UserServiceImpl(); //实例化业务类
-				User uss = new User();
-				uss.setPassword(password);
-				User cx = us.findPassword(login.getUserId());	//调用查询方法
-				System.out.println(cx);
-				if(cx!=null){
-					
+					UserService us = new UserServiceImpl(); //实例化业务类
 					User user = new User();
-					user.setUserId(login.getUserId());
-					user.setPassword(passwordone);
-					ResBo uo = us.updatePassword(user);
-					System.out.println(uo);
-					if(uo.getMsg()!=null){
+					user.setPassword(password);
+					ResBo uo = us.updatePassword(login.getUserId(), passwordone, password);
+					
+					if(uo.isSuccess()){
 						request.setAttribute("uo", uo.getMsg()); //创建属性
+						
 						request.getRequestDispatcher("/WEB-INF/Jsp/success.jsp").forward(request, response); //页面转发
 					}else{
-						response.sendRedirect("../userpwd/updatepwd.do"); //重定向到 修改密码页面
+						response.sendRedirect("../userpwd/updatepwd.do");
 					}
-				}else{
-					response.sendRedirect("../userpwd/updatepwd.do");//重定向到 修改密码页面
 				}
-			}
-			
-		
-			
 		}
-		
-
-		
-			
-		
-		
 	}
 
 }

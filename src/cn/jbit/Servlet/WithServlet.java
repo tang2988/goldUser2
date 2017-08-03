@@ -2,6 +2,7 @@ package cn.jbit.Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -94,7 +95,7 @@ public class WithServlet extends HttpServlet {
 				wf.setRechargeStatus(10);
 				wf.setSucceedtime(new Date());
 				wf.setUserId(login.getUserId());
-				wf.setWithdrawdMoneny(Long.valueOf(czmonery));
+				wf.setWithdrawdMoneny(new BigDecimal(czmonery));
 				wf.setErrortime(new Date());
 				ResBo tx = service.insert(wf);
 				if (tx.getMsg() != null) {

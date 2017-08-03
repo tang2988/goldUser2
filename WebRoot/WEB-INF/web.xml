@@ -72,4 +72,48 @@
     <servlet-name>ToppServlet</servlet-name>
     <url-pattern>/topp/*</url-pattern>
   </servlet-mapping>
+  
+    <servlet>
+    	<description>详情页</description>
+    <servlet-name>DetailPageServle</servlet-name>
+    <servlet-class>cn.jbit.Servlet.DetailPageServle</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailPageServle</servlet-name>
+    <url-pattern>/detail/*</url-pattern>
+  </servlet-mapping>
+  
+  
+      <servlet>
+    	<description>购物订单</description>
+    <servlet-name>ShoppingServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.ShoppingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShoppingServlet</servlet-name>
+    <url-pattern>/shopping/*</url-pattern>
+  </servlet-mapping>
+  
+  
+      <servlet>
+    	<description>确认订单</description>
+    <servlet-name>ConfirmAnorder</servlet-name>
+    <servlet-class>cn.jbit.Servlet.ConfirmAnorderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConfirmAnorder</servlet-name>
+    <url-pattern>/confirm/*</url-pattern>
+  </servlet-mapping>
+  
+      <servlet>
+    	<description>订单详情</description>
+    <servlet-name>LineitemServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.LineitemServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LineitemServlet</servlet-name>
+    <url-pattern>/lineitem/*</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>

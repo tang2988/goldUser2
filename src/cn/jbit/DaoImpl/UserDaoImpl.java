@@ -40,7 +40,38 @@ public class UserDaoImpl implements UserDao {
 		}
 		return null;
 	}
-	public Integer Zhuce(User user){
+	
+	
+public User findUserById(Long userId){
+		
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			User  us =null;
+			String sql = "select * from t_user WHERE UserId = ?";
+			ps = con.prepareStatement(sql);
+			ps.setLong(1, userId);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				us = new User();
+				us.setUserId(rs.getLong("UserId"));
+				us.setRealName(rs.getString("RealName"));
+				us.setPassword(rs.getString("Password"));
+				us.setTransactionPwd(rs.getString("transactionPwd"));
+				us.setMobilePhone(rs.getString("mobilePhone"));
+				us.setUserStatus(rs.getInt("UserStatus"));
+				us.setIdcardNo(rs.getString("idcardNo"));
+			}
+			ConnectionUtil.closeResource(con, ps, rs);
+			return us;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public User Zhuce(User user){
 		try {
 			Connection con = ConnectionUtil.getConnection();
 			PreparedStatement ps = null;
@@ -56,8 +87,17 @@ public class UserDaoImpl implements UserDao {
 			ps.setInt(5, user.getUserStatus());
 			ps.setString(6, user.getIdcardNo());
 			int zc = ps.executeUpdate();
+			
+			ResultSet rs = null;
+			PreparedStatement pss = null;
+			String sql2 = "select UserId from t_user order by UserId desc limit 1";
+			pss = con.prepareStatement(sql2);
+			rs = pss.executeQuery();
+			while(rs.next()){
+				user.setUserId(rs.getLong("UserId"));
+			}
 			ConnectionUtil.closeResource(con, ps, null);
-			return zc;
+			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -224,12 +264,38 @@ public class UserDaoImpl implements UserDao {
 		return null;
 		
 	}
+	
+	public User getpassword(String password) {
+
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			User user = null;
+			String sql = "SELECT Password from t_user where Password=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, password);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				user = new User();
+				user.setMobilePhone(rs.getString("Password"));
+			}
+			
+			ConnectionUtil.closeResource(con, ps, rs);
+			return user;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+
+	}
 	public static void main(String[] args) {
 		UserDao ud = new UserDaoImpl();
 		User user = new User();
 		user.setUserId(2L);
 		
-		 User aa = ud.transactionPwd(2L);
+		 User aa = ud.findPassword(2L);
 		 
 System.out.println(aa);
 	}

@@ -59,10 +59,16 @@ public interface UserService {
 	 * @param user
 	 * @return
 	 */
-	public ResBo updatePassword(User user);
+	public ResBo updatePassword(Long userId, String password, String password_old) ;
 	
 	/**
 	 * 根据ID查询交易密码
 	 */
-	public User transactionPwd(Long uid);
+	public ResBo transactionPwd(Long uid,String trpassword);
+	
+	/**
+	 * 根据密码查询密码
+	 * 
+	 */
+	public User getpassword(String password);
 }

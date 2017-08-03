@@ -19,7 +19,7 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
 	public Boolean Recharge(Account account) {
-		return accountDao.Chongzhi(account);
+		return accountDao.JianKuan(account);
 	}
 
 }
