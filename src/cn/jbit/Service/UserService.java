@@ -71,4 +71,6 @@ public interface UserService {
 	 * 
 	 */
 	public User getpassword(String password);
+	
+	public User findUserById(Long userId);
 }

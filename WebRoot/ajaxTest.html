@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ajaxTest.html</title>
+
+<meta name="keywords" content="keyword1,keyword2,keyword3">
+<meta name="description" content="this is my page">
+<meta name="content-type" content="text/html; charset=UTF-8">
+
+<!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+function getUser(){
+	console.info($("#frm1").serialize());
+	
+	/* var pram = {};
+	pram["userId"] =3 ;
+	pram["password"] ="xxxxxx" ;
+	console.info(pram); */
+	
+	$.ajax({
+		   type: "GET",
+		   url: "home/getUser4ajax.do",
+		   data: $("#frm1").serialize(),
+		   async: true,
+		   //timeout: "",
+		   dataType: "json",
+		   success: function(d){
+		     console.info(d);
+		     
+		     if(d.isSuccess==0){
+		    	 alert(d.data.mobilePhone);
+		     }else{
+		    	 alert("not ok");
+		     }
+		   }
+		});
+}
+
+function getrealName(){
+	
+	$.ajax({
+		
+		type:"GET",
+		url:"home/getUser4ajax.do",
+		data:$("#frm1").serialize(),
+		async: true,
+		dataType: "json",
+		
+		success: function(dd){
+			console.info(dd);
+			if(dd.isSuccess==0){
+				alert(dd.data.realName);
+			}else{
+				alert("失败找不到");
+			}
+		}
+	});	
+}
+function getmonery(){
+	
+	$.ajax({
+		
+		type:"GET",
+		url:"home/getUser5ajax.do",
+		data:$("#frm1").serialize(),
+		async: true,
+		dataType: "json",
+		
+		success: function(dd){
+			console.info(dd);
+			if(dd.isSuccess==0){
+				alert(dd.data.accountbalance);
+			}else{
+				alert("失败找不到");
+			}
+		}
+	});	
+}
+</script>
+
+</head>
+
+
+<body>
+	This is my HTML page.
+	<input type="button" value="getUser" onclick="getUser()">
+	
+	<input type="button" value="getName" onclick="getrealName()">
+	
+	<input type="button" value="getMonery" onclick="getmonery()">
+	
+	<form action="" id="frm1">
+		<input name="userId" value="2">
+		<input name="p12" value="v12">
+		<input name="p13" value="v13">
+		
+	</form>
+	
+	<p style="height: 1000px;background-color: #sdf">
+	123123123123
+	</p>
+	<br>
+</body>
+</html>
+

@@ -128,4 +128,8 @@ public class UserServiceImpl implements UserService {
 		return dao.getpassword(password);
 	}
 
+	@Override
+	public User findUserById(Long userId) {
+		return dao.findUserById(userId);
+	}
 }
