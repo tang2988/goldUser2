@@ -36,18 +36,32 @@
 			<td><table>
 					<tr>
 						<td><%@include file="Order.jsp" %></td>
-						<td>
-							<h2>资产总额</h2>
-							<dl>
-								<dt>资产总额(元)昨天总收益(元) 累计收益(元) 冻结资金(元)00.00</dt>
-								<dd>${ac.accountbalance},${ac.accountbalance},${ac.accumulatedIncome},${ac.frozenCapital}</dd>
-							</dl>
-						</td>
+						<td><table>
+                        	<tr>
+                            	<td colspan="4"><h2>资产总额</h2></td>
+                            </tr>
+                        	<tr>
+                            
+							
+								<td>资产总额(元)</td>
+                                <td>昨天总收益(元)</td> 
+                                <td>累计收益(元)</td>
+                                <td> 冻结资金(元)</td>
+								
+                             </tr>
+                             <tr>
+                             	<td>${ac.accountbalance}</td>
+                                <td>${ac.accountbalance}</td> 
+                                <td>${ac.accumulatedIncome}</td>
+                                <td>${ac.frozenCapital}</td>
+                             
+                             </tr>
+						</table></td>
+                        	
 					</tr>
 				
 				</table></td>
-				
-				
+					
 		</tr>
 		<tr>
 			<td><table style="margin-left:100px">

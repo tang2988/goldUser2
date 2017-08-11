@@ -3,6 +3,7 @@ package cn.jbit.Servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,16 +41,11 @@ public class ShoppingServlet extends HttpServlet {
 		
 		
 		OrderinformationService orderinformationService = new OrderinformationServiceImpl();
-		Orderinformation orderinformation = orderinformationService.findOrderById(login.getUserId());
+		List<Map<String, Object>> mapList = orderinformationService.OrderAll(login.getUserId());
 		
-		List<Orderinformation> list = orderinformationService.findOrderAll();
+		List<Orderinformation> list = orderinformationService.findOrderAll(login.getUserId());
 		
-		
-		ProductinformationService ps = new ProductinformationServiceImpl();
-		Productinformation productin = ps.findProById(orderinformation.getProductId());
-		
-		request.setAttribute("orderinformation", orderinformation);
-		request.setAttribute("productin", productin);
+		request.setAttribute("mapList", mapList);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/Jsp/ShoppingOrder.jsp").forward(request, response);
 	}

@@ -39,16 +39,19 @@ public class LineitemServlet extends HttpServlet {
 			response.sendRedirect("../userlogin/login.do");
 			return;
 		}
+		String orderId = request.getParameter("orderId");
+		
 		response.setCharacterEncoding("utf-8");
 		OrderinformationService os = new OrderinformationServiceImpl();
 		ProductinformationService ps = new ProductinformationServiceImpl();
 		AddressService as = new AddressServiceImpl();
 		
-		Orderinformation orderinformation = os.findOrderById(login.getUserId());
+		Orderinformation orderinformation = os.findOrderById(login.getUserId(),Long.valueOf(orderId));
 		
 		Productinformation productinformation = ps.findProById(orderinformation.getProductId());
 		
-		Address address = as.findByuserId(login.getUserId());
+		Address address = as.findByuserId(login.getUserId(),orderinformation.getAddressId());
+		
 		request.setAttribute("orderinformation", orderinformation);
 		request.setAttribute("productinformation", productinformation);
 		request.setAttribute("address", address);

@@ -17,7 +17,9 @@ public interface AddressService {
 	
 	public Address findById(Long addressId);
 	
-	public Address findByuserId(Long userId);
+	public Address findByuserId(Long userId,Long addressId);
+	
+	public Address findByuserId(Long userid);
 
 
 }

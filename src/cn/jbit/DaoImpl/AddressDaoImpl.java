@@ -102,16 +102,17 @@ public class AddressDaoImpl implements AddressDao{
 	}
 	
 	
-	public Address findByuserId(Long userId){
+	public Address findByuserId(Long userId,Long addressId){
 		
 		try {
 			Connection con = ConnectionUtil.getConnection();
 			PreparedStatement ps = null;
 			ResultSet rs = null;
-			String sql = "select * from t_address where userId = ?";
+			String sql = "select * from t_address where userId = ? and addressId = ?";
 			Address address = null;
 			ps = con.prepareStatement(sql);
 			ps.setLong(1, userId);
+			ps.setLong(2, addressId);
 			rs = ps.executeQuery();
 			
 			while(rs.next()){
@@ -130,4 +131,35 @@ public class AddressDaoImpl implements AddressDao{
 		}
 		return null;
 	}
+	
+public Address findByuserId(Long userid){
+		
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			String sql = "select * from t_address where userId = ?";
+			Address address = null;
+			ps = con.prepareStatement(sql);
+			ps.setLong(1, userid);
+			rs = ps.executeQuery();
+			
+			while(rs.next()){
+				address = new Address();
+				address.setAddressId(rs.getLong("addressId"));
+				address.setUserName(rs.getString("userName"));
+				address.setUserId(rs.getLong("userId"));
+				address.setMobilePhone(rs.getString("mobilePhone"));
+				address.setTwelveProvincesAndcities(rs.getString("twelveProvincesAndcities"));
+				address.setDetailedAddressStreet(rs.getString("detailedAddressStreet"));
+			}
+			ConnectionUtil.closeResource(con, ps, null);
+			return address;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	
 }

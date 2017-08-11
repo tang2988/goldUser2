@@ -1,6 +1,7 @@
 package cn.jbit.Service;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.jbit.base.ResBo;
 import cn.jbit.entity.Address;
@@ -19,8 +20,10 @@ public interface OrderinformationService {
 	
 	public Integer updateOrder(Orderinformation orderinformation);
 	
-	public Orderinformation findOrderById(Long UserId);
+	public Orderinformation findOrderById(Long UserId,Long orderId);
 	
-	public List<Orderinformation> findOrderAll();
+	public List<Orderinformation> findOrderAll(Long UserId);
+	
+	public List<Map<String, Object>> OrderAll(Long UserId);
 
 }

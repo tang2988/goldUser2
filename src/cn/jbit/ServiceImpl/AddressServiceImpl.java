@@ -20,8 +20,12 @@ public class AddressServiceImpl implements AddressService {
 		return addressDao.findById(addressId);
 	}
 
-	public Address findByuserId(Long userId) {
-		return addressDao.findByuserId(userId);
+	public Address findByuserId(Long userId,Long addressId) {
+		return addressDao.findByuserId(userId,addressId);
 	}
-
+	
+	public Address findByuserId(Long userid){
+		return addressDao.findByuserId(userid);
+	}
+	
 }

@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
   </head>
-      <script
+     <script
 	src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
 <script
 	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
@@ -29,38 +29,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 <script>
 
-<script
-src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
-<script
-src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
-<script
-src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
-<script>
-
 $.validator.setDefaults({       
-submitHandler: function(form) {    
-    form.submit();    
-}      
+    submitHandler: function(form) {    
+        form.submit();    
+   }      
 });
 
 $().ready(function() {
-jQuery.validator.addMethod("czmoneryRules", function(value, element) {
-	var czmonery = /^([0-9]+)$/;
-	return czmonery.test(value);
-	}, "充值金额只能输入数字");
-
-
-$("form").validate({
-	rules: {
-		czmonery:{
-			required:true,
-			czmoneryRules:true,	
-		},
-		passwordjy:{
-			required:true,
-		}
-	},
-});
+    jQuery.validator.addMethod("czmoneryRules", function(value, element) {
+    	var czmonery = /^([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(.[0-9]{1,2})?$/;
+    	return czmonery.test(value);
+    	}, "提现金额");
+    
+    
+    $("form").validate({
+    	rules: {
+    		czmonery:{
+				required:true,
+				czmoneryRules:true,	
+			},
+    	},
+    });
 });
 </script>
   

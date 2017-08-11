@@ -20,45 +20,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
   </head>
   
-  <script src="js/lib/jquery/jquery-1.9.0.min.js"></script>
-<script src="js/lib/jquery-validation/jquery.validate.min.js"></script>
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
-<script>
-$.validator.setDefaults({
-    submitHandler: function() {
-      alert("提交事件!");
-    }
-});
-$().ready(function() {
-    $("#commentForm").validate();
-});
-</script>
 <body>
-<form class="cmxform" id="commentForm" method="get" action="">
-  <fieldset>
-    <legend>输入您的名字，邮箱，URL，备注。</legend>
-    <p>
-      <label for="cname">Name (必需, 最小两个字母)</label>
-      <input id="cname" name="name" minlength="2" type="text" required>
-    </p>
-    <p>
-      <label for="cemail">E-Mail (必需)</label>
-      <input id="cemail" type="email" name="email" required>
-    </p>
-    <p>
-      <label for="curl">URL (可选)</label>
-      <input id="curl" type="url" name="url">
-    </p>
-    <p>
-      <label for="ccomment">备注 (必需)</label>
-      <textarea id="ccomment" name="comment" required></textarea>
-    </p>
-    <p>
-      <input class="submit" type="submit" value="Submit">
-    </p>
-  </fieldset>
-</form>
-  </body>
+<table width=>
+	<tr>
+    	<td><table width="1000px">
+        	<tr>
+            	<td>客服热线:4000-888-888</td>
+                <td colspan="6"><a href="userlogin/Register.do">注册</a>|<a href="userlogin/login.do">登录</a></td>
+            </tr>
+            <tr>
+            	<td>
+                	<a href="#">金狮爷</a>
+                </td>
+                <td><a href="index.jsp">首页</a></td>
+                <td><a href="#">我要买金</a></td>
+                <td><a href="#">黄金饰品</a></td>
+                <td><a href="#">安全保障</a></td>
+                  <td><a href="#">关于我们</a></td>
+            </tr>
+            
+        </table></td>
+    	
+    </tr>
+	
+</table>
+
+</body>
 </html>

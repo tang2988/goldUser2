@@ -1,6 +1,7 @@
 package cn.jbit.Dao;
 
 import java.util.List;
+import java.util.Map;
 
 import cn.jbit.entity.Orderinformation;
 
@@ -14,9 +15,13 @@ public interface OrderinformationDao {
 	
 	public Integer updateOrder(Orderinformation orderinformation);
 	
-	public Orderinformation findOrderById(Long UserId);
+	public Orderinformation findOrderById(Long UserId,Long orderId);
 	
-	public List<Orderinformation> findOrderAll();
+	public List<Orderinformation> findOrderAll(Long UserId);
+	
+	public List<Map<String, Object>> OrderAll(Long UserId);
+	
+	
 	
 	
 }

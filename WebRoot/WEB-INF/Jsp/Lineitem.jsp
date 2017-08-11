@@ -46,10 +46,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <td>剩余支付时间</td>
                 </tr>
                   <tr>
-                  		<td><input type="hidden" name="id" value="${productinformation.productId}"/></td>
                        <td>交易单号${orderinformation.orderId}</td>
                        <td>下单时间${orderinformation.orderTime}:</td>
-                       <td>支付时间:</td>
+                       <td>支付时间:${orderinformation.timeofpayment}</td>
                   </tr>
                   <tr>
                   	<td>商品名称</td>
@@ -63,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <td>${productinformation.gramWeight}</td>
                     <td>${productinformation.productPrice}</td>
                     <td>${orderinformation.quantity }</td>
-                    <td>${productinformation.productPrice}</td>
+                    <td>${orderinformation.orderAmount}</td>
                   </tr>  
           </table></td>
     
@@ -81,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </tr>
             <tr>
             	<td>发票信息:${orderinformation.invoiceInformation}</td>
-                <td>商品金额：</td>
+                <td>商品金额：${orderinformation.orderAmount}</td>
             </tr>
         	<tr>
             	<td>备注:${orderinformation.remark}</td>

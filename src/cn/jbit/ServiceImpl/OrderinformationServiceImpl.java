@@ -3,6 +3,9 @@ package cn.jbit.ServiceImpl;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+
+import javax.management.RuntimeErrorException;
 
 import cn.jbit.Dao.AccountDao;
 import cn.jbit.Dao.AddressDao;
@@ -26,7 +29,7 @@ public class OrderinformationServiceImpl implements OrderinformationService {
 	ProductinformationDao productinformationDao = new ProductinformationDaoImpl();
 	AddressDao addressDao = new AddressDaoImpl();
 
-	public ResBo addOrder(Orderinformation orderinformation,Address addre) {
+	public ResBo addOrder(Orderinformation orderinformation, Address addre) {
 
 		ResBo resBo = new ResBo();
 		// 根据产品ID查询
@@ -45,17 +48,17 @@ public class OrderinformationServiceImpl implements OrderinformationService {
 			resBo.setSuccess(false);
 			return resBo;
 		}
-		//TODO 保存地址
+		// TODO 保存地址
 		Address addressDB = addressDao.add(addre);
-		if(addressDB==null){
+		if (addressDB == null) {
 			resBo.setMsg("保存地址失败");
 			resBo.setSuccess(false);
 			return resBo;
 		}
 		orderinformation.setAddressId(addressDB.getAddressId());
-		
-		 Orderinformation count = orderinformationDao.addOrder(orderinformation);
-		if (count !=null ) {
+
+		Orderinformation count = orderinformationDao.addOrder(orderinformation);
+		if (count != null) {
 			// 库存赋值
 			productinformation.setBepertory(kucun - orderinformation.getQuantity()); // 库存-数量
 
@@ -85,17 +88,17 @@ public class OrderinformationServiceImpl implements OrderinformationService {
 
 		// 获取下单金额
 		BigDecimal aa = orderinformation.getOrderAmount();
-		Long my = new Long(money.longValue()); //用户余额
-		Long lg = new Long(aa.longValue()); //下单
-		if (lg>my) {
+		Long my = new Long(money.longValue()); // 用户余额
+		Long lg = new Long(aa.longValue()); // 下单
+		if (lg > my) {
 			resBo.setMsg("余额不足");
 			return resBo;
 		} else {
 		}
-		
-		account.setAccountbalance(new BigDecimal(my-lg)); // 当前余额
-																				// -
-																				// 订单金额
+
+		account.setAccountbalance(new BigDecimal(my - lg)); // 当前余额
+															// -
+															// 订单金额
 
 		Boolean yuer = accountDao.JianKuan(account);
 		if (yuer) {
@@ -110,7 +113,6 @@ public class OrderinformationServiceImpl implements OrderinformationService {
 		return resBo;
 
 	}
-	
 
 	public static void main(String[] args) {
 		OrderinformationService orderinformationService = new OrderinformationServiceImpl();
@@ -135,25 +137,53 @@ public class OrderinformationServiceImpl implements OrderinformationService {
 		orderinformation.setPaymentMethod("银行");
 		Address addre = new Address();
 		addre.setUserId(1L);
-		addre.setDetailedAddressStreet("白石洲"); 
+		addre.setDetailedAddressStreet("白石洲");
 		addre.setMobilePhone("15012847930");
 		addre.setTwelveProvincesAndcities("广东省深圳市南山区");
 		addre.setUserName("xxh");
 		ResBo aa = orderinformationService.addOrder(orderinformation, addre);
 		ResBo bb = orderinformationService.pay(orderinformation);
-		System.out.println("提示" + aa+"----"+ bb);
+		System.out.println("提示" + aa + "----" + bb);
 	}
 
 	public Integer updateOrder(Orderinformation orderinformation) {
 		return orderinformationDao.updateOrder(orderinformation);
 	}
 
-	public Orderinformation findOrderById(Long UserId) {
-		return orderinformationDao.findOrderById(UserId);
-	}
-	
-	public List<Orderinformation> findOrderAll(){
-		return orderinformationDao.findOrderAll();
+	public Orderinformation findOrderById(Long UserId,Long orderId) {
+		return orderinformationDao.findOrderById(UserId,orderId);
 	}
 
+	public List<Orderinformation> findOrderAll(Long UserId) {
+		return orderinformationDao.findOrderAll(UserId);
+	}
+
+	public List<Map<String, Object>> OrderAll(Long UserId) {
+		List<Map<String, Object>> lst = orderinformationDao.OrderAll(UserId);
+		for (Map<String, Object> rowMap : lst) {
+			Integer orderStatus = (Integer) rowMap.get("orderStatus");
+			// 状态：10下单成功；20支付成功；30已发货；40已收货；90失败'
+			switch (orderStatus) {
+			case 10:
+				rowMap.put("orderStatusStr", "下单成功");
+				break;
+			case 20:
+				rowMap.put("orderStatusStr", "支付成功");
+				break;
+			case 30:
+				rowMap.put("orderStatusStr", "已发货");
+				break;
+			case 40:
+				rowMap.put("orderStatusStr", "已收货");
+				break;
+			case 90:
+				rowMap.put("orderStatusStr", "失败");
+				break;
+			default:
+				throw new RuntimeException("此状态不能识别"+orderStatus);
+			}
+		}
+		return lst;
+
+	}
 }
