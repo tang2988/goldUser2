@@ -95,10 +95,12 @@ public class ToppServlet extends HttpServlet {
 			String czmonery = request.getParameter("czmonery").trim();
 			String raid = request.getParameter("raid").trim();
 			
-			if(czmonery==null || czmonery.equals("") & raid==null || raid.equals("")){
+			if(czmonery==null || czmonery.equals("")){
+				response.sendRedirect("topp/top.do");
+			}else if(raid==null || raid.equals("")){
 				response.sendRedirect("topp/top.do");
 			}
-			if(!Pattern.compile("^([0-9]+)$").matcher(czmonery).find()){
+			if(!Pattern.compile("^([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(.[0-9]{1,2})?$").matcher(czmonery).find()){
 					 response.sendRedirect("topp/top.do");
 					 return;
 			}else{
@@ -108,7 +110,9 @@ public class ToppServlet extends HttpServlet {
 				tp.setRechargeStatus(10);
 				tp.setRechargeTime(new Date());
 				tp.setSucceedTime(new Date());
+			
 				tp.setRecharmoney(new BigDecimal(czmonery));
+				
 				tp.setBanklistId(Long.valueOf(raid));
 				tp.setUserId(login.getUserId());
 				

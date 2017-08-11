@@ -29,12 +29,9 @@ public class TopuprechargeServiceImpl implements TopuprechargeService{
 			//获取当前余额
 			 BigDecimal ye = account.getAccountbalance();
 			BigDecimal aa = topuprecharge.getRecharmoney();
-			Long lg = new Long(aa.longValue());
-			
-			Long lg1 = new Long(ye.longValue());
 			
 			//余额赋值
-			account.setAccountbalance(new BigDecimal(lg1+lg)); //当前余额+充值余额
+			account.setAccountbalance(ye.add(aa)); //当前余额+充值余额
 			
 			//更新账户数据
 			Boolean bl = accountDao.JianKuan(account);
@@ -55,7 +52,7 @@ public class TopuprechargeServiceImpl implements TopuprechargeService{
 		Topuprecharge tp = new Topuprecharge();
 		tp.setRechargeStatus(10);
 		tp.setRechargeTime(new Date());
-		tp.setRecharmoney(new BigDecimal(10000));
+		tp.setRecharmoney(new BigDecimal(10000.20));
 		tp.setSucceedTime(new Date());
 		tp.setBanklistId(1L);
 		tp.setUserId(1L);

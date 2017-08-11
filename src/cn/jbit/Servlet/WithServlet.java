@@ -84,7 +84,9 @@ public class WithServlet extends HttpServlet {
 			
 			String czmonery = request.getParameter("czmonery"); //获取表单组件名称提交的数据
 			String passwordjy = request.getParameter("passwordjy");//获取表单组件名称提交的数据
-			if (czmonery == null || czmonery.equals("") & passwordjy == null || passwordjy.equals("")) {
+			if (czmonery == null || czmonery.equals("") ) {
+				response.sendRedirect("withtx/tixian.do");
+			}else if(passwordjy == null || passwordjy.equals("")){
 				response.sendRedirect("withtx/tixian.do");
 			}
 			if(!Pattern.compile("^([0-9]+)$").matcher(czmonery).find()){

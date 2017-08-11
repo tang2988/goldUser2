@@ -38,7 +38,7 @@ $.validator.setDefaults({
 
 $().ready(function() {
     jQuery.validator.addMethod("czmoneryRules", function(value, element) {
-    	var czmonery = /^([0-9]+)$/;
+    	var czmonery = /^([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(.[0-9]{1,2})?$/;
     	return czmonery.test(value);
     	}, "充值金额只能输入数字");
     
@@ -48,8 +48,17 @@ $().ready(function() {
     		czmonery:{
 				required:true,
 				czmoneryRules:true,	
-			},	
+			},
+			raid:{
+				required:true,
+			}
     	},
+    	messages:{
+    		raid:{
+				required:"请选择方式",
+			}
+    		
+    	}
     });
 });
 </script>

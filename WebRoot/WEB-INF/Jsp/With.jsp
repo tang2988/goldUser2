@@ -55,7 +55,10 @@ $("form").validate({
 		czmonery:{
 			required:true,
 			czmoneryRules:true,	
-		},	
+		},
+		passwordjy:{
+			required:true,
+		}
 	},
 });
 });
@@ -79,7 +82,7 @@ $("form").validate({
               
               	 
               	 <td><table>
-                	<h2>账户充值</h2>
+                	<h2>账户提现</h2>
                  	<tr>
 						<td>账户余额 ${cx.accountbalance}元</td>
 					</tr>
@@ -87,10 +90,10 @@ $("form").validate({
                     	<td>提现银行卡</td>
                     </tr>  
                     <tr>
-                    	<td>提现金额<input type="text" name="czmonery" required /></td>
+                    	<td>提现金额<input type="text" name="czmonery"  /></td>
                     </tr> 
                     <tr>
-                    	<td>交易密码<input type="text" name="passwordjy" required maxlength="6"/></td>
+                    	<td>交易密码<input type="text" name="passwordjy"  maxlength="6"/></td>
                     </tr>  
                     <tr>
                     	<td><input type="submit" value="确认提交" /> </td>
