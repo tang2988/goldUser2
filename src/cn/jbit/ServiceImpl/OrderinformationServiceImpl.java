@@ -102,12 +102,22 @@ public class OrderinformationServiceImpl implements OrderinformationService {
 
 		Boolean yuer = accountDao.JianKuan(account);
 		if (yuer) {
-			resBo.setSuccess(true);
-			resBo.setMsg("下单成功");
-			resBo.setData(yuer);
-			return resBo;
+			orderinformation.setOrderStatus(20);
+			orderinformation.setTimeofpayment(new Date());
+			Integer count = orderinformationDao.updatePayOrder( orderinformation);
+			if(count>0){
+				resBo.setSuccess(true);
+				resBo.setMsg("支付成功");
+				resBo.setData(yuer);
+				return resBo;
+			}else{
+				resBo.setSuccess(false);
+				resBo.setMsg("支付失败");
+			}
+			
 		} else {
-			resBo.setMsg("下单失败");
+			resBo.setSuccess(false);
+			resBo.setMsg("支付失败");
 		}
 
 		return resBo;

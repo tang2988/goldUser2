@@ -29,7 +29,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
     	<td colspan="2"><table width="800">
         <h3>商品信息</h3>
-        <hr />
+        <input type="hidden" name="productId" value="${productId }"/>
+        <input type="hidden" name="shuliang"  value="${shuliang }"/>
+        
             <tr>
             	<td>商品名称</td>
                 <td>克重</td>
@@ -41,8 +43,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<td>${productin.productName}</td>
                 <td>${productin.gramWeight }</td>
                 <td>${productin.productPrice}</td>
-                <td>1</td>
-                <td>${productin.productPrice}</td>
+                <td>${shuliang }</td>
+                <td>${totalPrice}</td>
             </tr>
         </table></td>
     </tr>

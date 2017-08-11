@@ -221,6 +221,27 @@ public class OrderinformationDaoImpl implements OrderinformationDao {
 	}
 
 	
+	
+	public Integer updatePayOrder(Orderinformation orderinformation) {
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			String sql = "UPDATE t_orderinformation  set  orderStatus = ?,timeofpayment =?   where orderId = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, orderinformation.getOrderStatus());
+			ps.setTimestamp(2, new Timestamp(orderinformation.getTimeofpayment().getTime()));
+			ps.setLong(3, orderinformation.getOrderId());
+
+			int count = ps.executeUpdate();
+			ConnectionUtil.closeResource(con, ps, null);
+			return count;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	
 	public List<Map<String, Object>> OrderAll(Long UserId) {
 		List<Map<String, Object>> list = new ArrayList<>();
 		try {

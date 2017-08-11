@@ -70,7 +70,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                        	克重${map.gramWeight}
 	                        	</td>
 	                            <td>交易状态<br />05:58<br/>${map.orderStatusStr}</td>
-	                        	<td>操作<br/><a href="lineitem/12?orderId=${map.orderId}">查看详情</a> <!-- <br/><a href="#">取消订单</a> --></td>
+	                        	<td>操作<br/><a href="lineitem/12?orderId=${map.orderId}">查看详情</a>
+	                        	<c:if test="${map.orderStatusStr=='下单成功'}">
+	                        		<a href="confirm/Pay.do?orderId=${map.orderId}">去支付</a>
+	                        	</c:if>
+	                        	
+	                        	 <!-- <br/><a href="#">取消订单</a> --></td>
 	                        </tr>
 	                    </table></td>
 	                  

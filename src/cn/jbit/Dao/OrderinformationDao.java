@@ -15,6 +15,8 @@ public interface OrderinformationDao {
 	
 	public Integer updateOrder(Orderinformation orderinformation);
 	
+	public Integer updatePayOrder(Orderinformation orderinformation) ;
+	
 	public Orderinformation findOrderById(Long UserId,Long orderId);
 	
 	public List<Orderinformation> findOrderAll(Long UserId);

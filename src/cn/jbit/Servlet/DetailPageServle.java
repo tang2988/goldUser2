@@ -28,10 +28,13 @@ public class DetailPageServle extends HttpServlet {
 		
 		String url = request.getRequestURI();
 			if(url.endsWith("/detail")){
+				
+				String productId = request.getParameter("productId");
+				
 				response.setCharacterEncoding("utf-8");
 				ProductinformationService productinformationService = new ProductinformationServiceImpl();
 				
-				Productinformation productinformation = productinformationService.findProById(1L);
+				Productinformation productinformation = productinformationService.findProById(Long.valueOf(productId));
 				
 				request.setAttribute("productinformation", productinformation);
 				request.getRequestDispatcher("/WEB-INF/Jsp/DetailPage.jsp").forward(request, response);

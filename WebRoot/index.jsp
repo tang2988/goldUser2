@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </td>
                 <td><a href="index.jsp">首页</a></td>
                 <td><a href="#">我要买金</a></td>
-                <td><a href="#">黄金饰品</a></td>
+                <td><a href="product/12">黄金饰品</a></td>
                 <td><a href="#">安全保障</a></td>
                   <td><a href="#">关于我们</a></td>
             </tr>

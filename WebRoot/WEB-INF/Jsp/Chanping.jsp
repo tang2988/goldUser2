@@ -33,7 +33,7 @@ a{
                 <td>产品名称</td>
   
                  <td>状态</td>
-                 <td><a href="../detail/detail">立刻购买</a></td>
+                 <td><a href="../detail/detail?productId=${pf.productId}">立刻购买</a></td>
             </tr>
             <tr>
             	<td>${pf.productId}</td>
