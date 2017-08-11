@@ -22,29 +22,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
   </head>
+    <script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<script>
+
+$.validator.setDefaults({       
+    submitHandler: function(form) {    
+        form.submit();    
+   }      
+});
+
+$().ready(function() {
+    jQuery.validator.addMethod("czmoneryRules", function(value, element) {
+    	var czmonery = /^([0-9]+)$/;
+    	return czmonery.test(value);
+    	}, "充值金额只能输入数字");
+    
+    
+    $("form").validate({
+    	rules: {
+    		czmonery:{
+				required:true,
+				czmoneryRules:true,	
+			},	
+    	},
+    });
+});
+</script>
   
   <body>
     <form action="topp/top.do" method="post">
 	
 	<table>
     	<tr>
-        		<td><%@include file="123.jsp" %></td>
+        		<td><%@include file="homepage.jsp" %></td>
                
          </tr>
             <tr>
             	<td><table>
                 	<tr>
-                		<td width="30%"><a href="#">账户总览</a></td>
-                    </tr>
-                    <tr>
-                    	<td><a href="#">黄金资产</a></td>
-                    </tr>
-                    <tr>
-                    	<td><a href="#">我的订单</a></td>
-                    </tr>
-                    
-                    <tr>
-                    	<td><a href="#">资金明细产</a></td>
+                		<td><%@include file="Order.jsp" %></td>
                     </tr>
                    
               </table></td>
@@ -64,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     	</td>
                     </tr>  
                     <tr>
-                    	<td>充值金额<input type="text" name="czmonery" /></td>
+                    	<td>充值金额<input type="text" name="czmonery"/></td>
                     </tr>   
                     <tr>
                     	<td><input type="submit" value="充值" /> </td>

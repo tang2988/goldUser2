@@ -27,33 +27,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
     	<td><table width="1000px">
         	<tr>
-            	<td>上午好,账户安全</td>
-                <td>实时金价</td>
+            	<td><%@include file="homepage.jsp" %></td>
             </tr>
-            <tr>
-            	<td><a href="#">实名认证</a>
-                <a href="#">密码设置</a>
-                <a href="#">我的银行卡</a></td>
-                <td><a href="#">立即买入</a></td>
-            </tr>
+            
         </table></td>
        	<tr>
    		  <td colspan="2"><table>
             	<tr>
-                	<td><a href="#">账户总览</a></td>
+                	<td><%@include file="Order.jsp" %></td>
                 </tr>
-                <tr>
-                	<td><a href="#">黄金资产</a></td>
-                </tr>
-                <tr>
-                	<td><a href="#">我的订单</a></td>
-                </tr>
-                <tr>
-                	<td><a href="#">购物订单</a></td>
-                </tr>
-                <tr>
-                	<td><a href="#">资金明细</a></td>
-                </tr>
+                
             </table></td>
        </tr>
        	

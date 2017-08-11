@@ -24,5 +24,12 @@ public interface AccountService {
 	 * @return
 	 */
 	public Boolean Recharge(Account account);
+	
+	/**
+	 * 添加
+	 * @param account
+	 * @return
+	 */
+	public Account addAccount(Account account);
 
 }

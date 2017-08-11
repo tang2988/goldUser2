@@ -95,27 +95,21 @@ public class UserpwdServlet extends HttpServlet {
 				return;
 			}
 			
-			String password = request.getParameter("password");	//从页面表单组件名称获取提交的数据
+			String passwordy = request.getParameter("passwordy");	//从页面表单组件名称获取提交的数据
 			String passwordone = request.getParameter("passwordone");	//从页面表单组件名称获取提交的数据
 			String passwordtwo = request.getParameter("passwordtwo");	//从页面表单组件名称获取提交的数据
 			
-			if(password==null || password.equals("")){  //判断 等于 null 页面重定向到修改密码页面
+			if(passwordy==null || passwordy.equals("")){  //判断 等于 null 页面重定向到修改密码页面
 				response.sendRedirect("../userpwd/updatepwd.do");
 			}else if(passwordone == null || passwordone.equals("")){	//判断 等于 null 页面重定向到修改密码页面
-				response.sendRedirect("../userpwd/updatepwd.do");
-			}else if(passwordtwo == null || passwordtwo.equals("")){	//判断 等于 null 页面重定向到修改密码页面
 				response.sendRedirect("../userpwd/updatepwd.do");
 			}else if(!passwordone.equals(passwordtwo)){				//2次密码不一样 重定向到修改密码页面
 				response.sendRedirect("../userpwd/updatepwd.do");
 			}else{
 					UserService us = new UserServiceImpl(); //实例化业务类
-					User user = new User();
-					user.setPassword(password);
-					ResBo uo = us.updatePassword(login.getUserId(), passwordone, password);
-					
+					ResBo uo = us.updatePassword(login.getUserId(), passwordone, passwordy);
 					if(uo.isSuccess()){
 						request.setAttribute("uo", uo.getMsg()); //创建属性
-						
 						request.getRequestDispatcher("/WEB-INF/Jsp/success.jsp").forward(request, response); //页面转发
 					}else{
 						response.sendRedirect("../userpwd/updatepwd.do");
@@ -123,5 +117,5 @@ public class UserpwdServlet extends HttpServlet {
 				}
 		}
 	}
-
 }
+

@@ -1,5 +1,7 @@
 package cn.jbit.Service;
 
+import java.util.List;
+
 import cn.jbit.base.ResBo;
 import cn.jbit.entity.Address;
 import cn.jbit.entity.Orderinformation;
@@ -18,5 +20,7 @@ public interface OrderinformationService {
 	public Integer updateOrder(Orderinformation orderinformation);
 	
 	public Orderinformation findOrderById(Long UserId);
+	
+	public List<Orderinformation> findOrderAll();
 
 }

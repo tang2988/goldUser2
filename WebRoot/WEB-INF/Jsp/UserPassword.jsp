@@ -22,21 +22,65 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
   </head>
+  <script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<script>
+
+$.validator.setDefaults({       
+    submitHandler: function(form) {    
+        form.submit();    
+   }      
+});
+
+$().ready(function() {
+    jQuery.validator.addMethod("trPasswordRules", function(value, element) {
+    	var trPassword = /^([a-zA-Z0-9]+)$/;
+    	
+    	return  trPassword.test(value);
+    	},"只能输入数字和字母(6-10位)");
+    
+    $("form").validate({
+    	rules: {
+    		trPassword:{
+				required:true,
+				trPasswordRules:true,
+				
+			},
+			qrPassword: {
+		        required: true,
+		        minlength: 6,
+		        equalTo: "#trPassword"
+		      },
+    	},
+    	messages: {
+    		
+    	     
+    		qrPassword: {
+    	        required: "请输入确认密码",
+    	        minlength: "密码长度不能小于6位数",
+    	        equalTo: "两次密码输入不一致"
+    	      }
+    	},
+    	      
+    });
+});
+</script>
   
   <body>
     <form action="userpwd/userpwd.do" method="post">
 	<table width="1000">
     	<tr>
-        	<td><%@include file="123.jsp" %></td>
+        	<td><%@include file="homepage.jsp" %></td>
         </tr>
         <tr>
         	<td><table>
             	<tr>
-                	<td><a href="#">账户总览</a></td>
+                	<td><%@include file="Order.jsp" %></td>
                 </tr>
-                <tr><td><a href="#">黄金资产</a></td></tr>
-                <tr><td><a href="#">我的订单</a></td></tr>
-                <tr><td><a href="#">资金明细</a></td></tr>
                           
             </table></td>
         </tr>
@@ -60,13 +104,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                    	已经设置
                     	</c:if>
                     </td>
-                    <td><a href="#">设置</a></td>
+                    <td><a href="userpwd/userpwdd.do">设置</a></td>
                 </tr>
                	<tr>
-                	<td>交易密码<input type="password" name="trPassword" id="trPassword"></td></td>
+                	<td>交易密码<input type="password" name="trPassword" id="trPassword"  maxlength="6"></td>
                 </tr>
                 <tr>
-                	<td>请确认交易密码<input type="password" name="qrPassword" id="qrPassword"></td>
+                	<td>请确认交易密码<input type="password" name="qrPassword" id="qrPassword"  maxlength="6"></td>
                     
                 </tr>
                 <tr>

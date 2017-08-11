@@ -16,5 +16,7 @@ public interface OrderinformationDao {
 	
 	public Orderinformation findOrderById(Long UserId);
 	
+	public List<Orderinformation> findOrderAll();
+	
 	
 }

@@ -151,6 +151,48 @@ public class OrderinformationDaoImpl implements OrderinformationDao {
 		return null;
 	}
 	
+	public List<Orderinformation> findOrderAll(){
+		List<Orderinformation> list = new ArrayList<>();
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			Orderinformation  order = null;
+			String sql = "select * from t_orderinformation";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				
+				  order = new Orderinformation();
+				order.setOrderId(rs.getLong("orderId"));
+				order.setProductId(rs.getLong("productId"));
+				order.setQuantity(rs.getInt("quantity"));
+				order.setOrderAmount(rs.getBigDecimal("orderAmount"));
+				order.setOrderStatus(rs.getInt("orderStatus"));
+				order.setOrderTime(rs.getDate("orderTime"));
+				order.setTimeofpayment(rs.getDate("timeofpayment"));
+				order.setDeliverytime(rs.getDate("deliverytime"));
+				order.setReceivingtime(rs.getDate("receivingtime"));
+				order.setFailuretime(rs.getDate("failuretime"));
+				order.setCauseoffailure(rs.getString("causeoffailure"));
+				order.setAddressId(rs.getLong("addressId"));
+				order.setInvoiceInformation(rs.getString("invoiceInformation"));
+				order.setUserId(rs.getLong("userId"));
+				order.setDistributioncompany(rs.getString("distributioncompany"));
+				order.setTrackingNumberCourierNumber(rs.getLong("trackingNumberCourierNumber"));
+				order.setRemark(rs.getString("remark"));
+				order.setPaymentMethod(rs.getString("paymentMethod"));
+				list.add(order);
+			}
+			
+			ConnectionUtil.closeResource(con, ps, rs);
+			return list;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public Integer updateOrder(Orderinformation orderinformation){
 		try {
 			Connection con = ConnectionUtil.getConnection();

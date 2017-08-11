@@ -21,25 +21,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
   </head>
+  <script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<script>
+
+$.validator.setDefaults({       
+    submitHandler: function(form) {    
+        form.submit();    
+   }      
+});
+
+$().ready(function() {
+    jQuery.validator.addMethod("CardnoIdRules", function(value, element) {
+    	var CardnoId = /^[0-9]\d*$/;
+    	return CardnoId.test(value);
+    	},"请正确输入银行卡号");
+    
+    
+    $("form").validate({
+    	rules: {
+    		CardnoId:{
+				required:true,
+				CardnoIdRules:true,	
+			},	
+    	},
+    });
+});
+</script>
   
   <body>
   <form action="usercard/user.do" method="post">
 <table align="center">
 		<tr>
-        	<td><%@include file="123.jsp" %></td>
+        	<td><%@include file="homepage.jsp" %></td>
         </tr>
         
 		<tr>
 			<td><table>
 				<tr>
-					<td width="20%" ><a href="#">账户总览</a><br />
-                	<a href="#">黄金资产</a><br />
-              		 <a href="#">我的订单</a><br />
-               		 <a href="#">资金明细</a><br />
-					</td>
-                    
+					<td><%@include file="Order.jsp" %></td>
+                
 					<td>
-					<h2 style="margin-left:-10%">我的银行卡</h2>
+					<h2>我的银行卡</h2>
 						<p>银行卡支持列表：中国银行、招商银行、中国光大银行、中国农业银行、中国工商银行、中国建设银行、交通银行、
 
 北京银行、广发银行、中信银行、浦发银行、兴业银行、中国民生银行 

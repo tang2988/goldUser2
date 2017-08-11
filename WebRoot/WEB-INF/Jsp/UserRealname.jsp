@@ -21,28 +21,60 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
   </head>
+  <script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<script>
+
+$.validator.setDefaults({       
+    submitHandler: function(form) {    
+        form.submit();    
+   }      
+});
+
+$().ready(function() {
+	jQuery.validator.addMethod("realNameRules", function(value, element) {
+		var realName = /^[\u4e00-\u9fa5]+$/;
+		return realName.test(value);
+		}, "只能输入中文");
+    
+	jQuery.validator.addMethod("CardIdRules", function(value, element) { 
+		var CardId = /^\d{15}|\d{}18$/; 
+		return CardId.test(value); 
+		}, "身份证号码15位到18位");
+    
+    $("form").validate({
+    	rules: { 
+    		realName:{
+    		        
+    		        realNameRules:true,
+    		       },
+    		       
+    		       CardId:{
+    				
+    				CardIdRules:true,	
+    			}
+    	},
+    	
+    });
+});
+</script>
   
   <body>
-<form action="userRealname/real.do" method="post">
+<form action="userRealname/real.do" method="post" >
 	
 	<table width="80%">
     	<tr>
-        		<td><%@include file="123.jsp" %></td>
+        	<td><%@include file="homepage.jsp" %></td>
                
          </tr>
             <tr>
             	<td><table>
                 	<tr>
-                		<td width="30%"><a href="#">账户总览</a></td>
-                    </tr>
-                    <tr>
-                    	<td><a href="#">黄金资产</a></td>
-                    </tr>
-                    <tr>
-                    	<td><a href="#">我的订单</a></td>
-                    </tr>
-                    <tr>
-                    	<td><a href="#">资金明细产</a></td>
+                		<td><%@include file="Order.jsp" %></td>
                     </tr>
                    
               </table></td>
@@ -51,11 +83,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               	 <td><table>
                 	<h2>实名认证</h2>
                  	<tr>
-                   	 	<td>请输入姓名<input type="text" name="realName" id="realName"/>
+                   	 	<td>请输入姓名<input type="text" name="realName" id="realName" required/>
                  		</td>
                    	</tr> 
                     <tr>
-                   	 	<td>请输入身份证号码<input type="text" name="CardId" id="CardId"/>
+                   	 	<td>请输入身份证号码<input type="text" name="CardId" id="CardId" required maxlength="18"/>
                  		</td>
                    	</tr>
                     <tr>

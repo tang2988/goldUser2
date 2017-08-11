@@ -17,9 +17,13 @@ public class AccountServiceImpl implements AccountService {
 		return accountDao.findAccount(UserId);
 	}
 
-	@Override
 	public Boolean Recharge(Account account) {
 		return accountDao.JianKuan(account);
+		
+	}
+	
+	public Account addAccount(Account account){
+		return accountDao.addAccount(account);
 	}
 
 }

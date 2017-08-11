@@ -1,14 +1,20 @@
 package cn.jbit.ServiceImpl;
 
+import java.math.BigDecimal;
+
+import cn.jbit.Dao.AccountDao;
 import cn.jbit.Dao.UserDao;
+import cn.jbit.DaoImpl.AccountDaoImpl;
 import cn.jbit.DaoImpl.UserDaoImpl;
 import cn.jbit.Service.UserService;
 import cn.jbit.base.ResBo;
+import cn.jbit.entity.Account;
 import cn.jbit.entity.User;
 
 public class UserServiceImpl implements UserService {
 
 	UserDao dao = new UserDaoImpl();
+	AccountDao accountDao = new AccountDaoImpl();
 
 	public ResBo login(User user) {
 		ResBo res = new ResBo();
@@ -31,15 +37,34 @@ public class UserServiceImpl implements UserService {
 			resBo.setData(user); // 返回对象
 			return resBo;
 		}
-
+		
 		 User zc = dao.Zhuce(user); // 调用添加方法
 		if (zc !=null ) { // 大于0 就注册成功
-			resBo.setSuccess(true);
-			resBo.setMsg("注册成功");
-			resBo.setData(user); // 返回对象
+			
+			Account account = new Account();
+			account.setAccountbalance(new BigDecimal(0));
+			account.setAccountStatus(10);
+			account.setAccumulatedIncome(new BigDecimal(0));
+			account.setFrozenCapital(new BigDecimal(0));
+			account.setFrostgold(new BigDecimal(0));
+			account.setGoldgrammage(new BigDecimal(0));
+			account.setGoldpresentvalue(new BigDecimal(0));
+			account.setUserId(zc.getUserId());
+			account.setTotalAssets(new BigDecimal(0));
+			account = accountDao.addAccount(account);
+			if(account!=null){
+				resBo.setSuccess(true);
+				resBo.setMsg("注册成功");
+				resBo.setData(user); // 返回对象
+			}else{
+				resBo.setSuccess(false);
+				resBo.setMsg("注册失败");
+			}
+			
 		} else { // 否则注册失败
 			resBo.setMsg("注册失败");
 		}
+		
 		return resBo;
 	}
 
@@ -80,10 +105,9 @@ public class UserServiceImpl implements UserService {
 		if (!password_old.equals(userDB.getPassword())) {
 			resBo.setMsg("旧密码与数据库不一致");
 			return resBo;
-		} else {
+		}else{
 			
 		}
-		
 		// 根据用户ID修改密码
 		User user = new User();
 		user.setPassword(password);
@@ -91,6 +115,7 @@ public class UserServiceImpl implements UserService {
 		Integer count = dao.UpdatePassword(user);
 		if(count>0){
 			resBo.setSuccess(true);
+			resBo.setData(count);
 			return resBo;
 		}else{
 			
@@ -99,16 +124,22 @@ public class UserServiceImpl implements UserService {
 			return resBo;
 		}
 
-	}
+}
 
 	public static void main(String[] args) {
 
-//		Long userId = 1L;
-//		String password = "123123";// 新密码
-//		String password_old = "new123";// 新密码
-//
 		UserService us = new UserServiceImpl();
-//System.out.println(us.updatePassword(userId, password, password_old));
+ User user = new User();
+ user.setIdcardNo("123123");
+ user.setMobilePhone("13015847963");
+ user.setPassword("123123");
+ user.setRealName("xxh");
+ user.setTransactionPwd("123123");
+ user.setUserStatus(10);
+
+		//System.out.println(us.updatePassword(userId, password, password_old));
+ 	ResBo aa = us.register(user);
+		System.out.println(aa);
 		
 	}
 

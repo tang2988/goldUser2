@@ -14,4 +14,6 @@ public interface AccountDao {
 	
 	public Boolean JianKuan(Account account);
 	
+	public Account addAccount(Account account);
+	
 }

@@ -110,10 +110,10 @@
     <servlet-name>LineitemServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.LineitemServlet</servlet-class>
   </servlet>
+
+
   <servlet-mapping>
     <servlet-name>LineitemServlet</servlet-name>
     <url-pattern>/lineitem/*</url-pattern>
   </servlet-mapping>
-  
-  
 </web-app>

@@ -21,10 +21,11 @@ public class WithdrawalformServiceImpl implements WithdrawalformService {
 		
 		Account account = accountDao.findAccount(withdrawalform.getUserId());  //根据用户ID 获取用户信息
 		
-		Long dq = account.getAccountbalance(); //获取当前余额
+		 BigDecimal dq = account.getAccountbalance(); //获取当前余额
 		BigDecimal txx = withdrawalform.getWithdrawdMoneny(); //获取提现余额
 		Long tx = new Long(txx.longValue());
-		if(dq>tx){
+		Long yuer = new Long(dq.longValue());
+		if(yuer>tx){
 			resBo.setMsg("提现成功");
 			
 		}else{
@@ -33,7 +34,7 @@ public class WithdrawalformServiceImpl implements WithdrawalformService {
 		}
 		 Withdrawalform count = withdrawalformDao.insert(withdrawalform);
 		if(count!=null){
-			account.setAccountbalance(dq - tx);  //当前余额-提现余额
+			account.setAccountbalance(new BigDecimal(yuer - tx));  //当前余额-提现余额
 			
 			Boolean up = accountDao.JianKuan(account);
 			if(up){
@@ -55,7 +56,7 @@ public class WithdrawalformServiceImpl implements WithdrawalformService {
 		withdrawalform.setRechargeStatus(10);
 		withdrawalform.setSucceedtime(new Date());
 		withdrawalform.setUserId(1L);
-		withdrawalform.setWithdrawdMoneny(new BigDecimal(12000));
+		withdrawalform.setWithdrawdMoneny(new BigDecimal(12));
 		ResBo aa = service.insert(withdrawalform);
 		System.out.println(aa);
 	}

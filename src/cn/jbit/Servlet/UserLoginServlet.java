@@ -96,16 +96,16 @@ public class UserLoginServlet extends HttpServlet {
 				return; // 终止
 			}
 			System.out.println(mobliePhone);
-			 if(Pattern.compile("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$").matcher(mobliePhone).find()){
+			 if(Pattern.compile("^(((13[0-9]{1})|(15[0-9]{1}))+\\d{8})$").matcher(mobliePhone).find()){
 			 
 			 }else{
 				 response.sendRedirect("../userlogin/Register.do");
 				 return;
 			 }
-			 if(!Pattern.compile("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$").matcher(Password).find()){
-			 response.sendRedirect("../userlogin/Register.do");
-			 return;
-			 }
+//			 if(!Pattern.compile("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$").matcher(Password).find()){
+//			 response.sendRedirect("../userlogin/Register.do");
+//			 return;
+//			 }
 			User user = new User(); // 实例化
 			user.setMobilePhone(mobliePhone);
 			user.setPassword(Password);
@@ -115,7 +115,7 @@ public class UserLoginServlet extends HttpServlet {
 			user.setUserStatus(10);
 			UserService us = new UserServiceImpl(); // 实例化业务类
 			ResBo zc = us.register(user); // 调用业务类的方法
-			if (zc.isSuccess()) {
+			if (zc.getMsg()!=null) {
 
 				response.sendRedirect("../userlogin/login.do"); // 重定向
 			} else {

@@ -2,6 +2,7 @@ package cn.jbit.ServiceImpl;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import cn.jbit.Dao.AccountDao;
 import cn.jbit.Dao.AddressDao;
@@ -80,18 +81,19 @@ public class OrderinformationServiceImpl implements OrderinformationService {
 		Account account = accountDao.findAccount(orderinformation.getUserId());
 
 		// 获取用户余额
-		Long money = account.getAccountbalance();
+		BigDecimal money = account.getAccountbalance();
 
 		// 获取下单金额
 		BigDecimal aa = orderinformation.getOrderAmount();
-		Long ab = new Long(aa.longValue());
-		if (ab>money) {
+		Long my = new Long(money.longValue()); //用户余额
+		Long lg = new Long(aa.longValue()); //下单
+		if (lg>my) {
 			resBo.setMsg("余额不足");
 			return resBo;
 		} else {
 		}
 		
-		account.setAccountbalance(money - ab); // 当前余额
+		account.setAccountbalance(new BigDecimal(my-lg)); // 当前余额
 																				// -
 																				// 订单金额
 
@@ -148,6 +150,10 @@ public class OrderinformationServiceImpl implements OrderinformationService {
 
 	public Orderinformation findOrderById(Long UserId) {
 		return orderinformationDao.findOrderById(UserId);
+	}
+	
+	public List<Orderinformation> findOrderAll(){
+		return orderinformationDao.findOrderAll();
 	}
 
 }

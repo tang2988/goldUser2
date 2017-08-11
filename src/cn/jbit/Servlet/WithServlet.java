@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -79,18 +80,20 @@ public class WithServlet extends HttpServlet {
 				return;
 			}
 
+			
+			
 			String czmonery = request.getParameter("czmonery"); //获取表单组件名称提交的数据
 			String passwordjy = request.getParameter("passwordjy");//获取表单组件名称提交的数据
-			if (czmonery == null || czmonery.equals("")) {
+			if (czmonery == null || czmonery.equals("") & passwordjy == null || passwordjy.equals("")) {
 				response.sendRedirect("withtx/tixian.do");
-			} else if (passwordjy == null || passwordjy.equals("")) {
-				response.sendRedirect("withtx/tixian.do");
-			} else {
+			}
+			if(!Pattern.compile("^([0-9]+)$").matcher(czmonery).find()){
+				 response.sendRedirect("withtx/tixian.do");
+				 return;
+			}else {
 				WithdrawalformService service = new WithdrawalformServiceImpl(); //实例化业务类
 
 				Withdrawalform wf = new Withdrawalform();
-//				UserService us = new UserServiceImpl();
-//				User jy = us.transactionPwd(login.getUserId());
 				wf.setApplyfortime(new Date());
 				wf.setRechargeStatus(10);
 				wf.setSucceedtime(new Date());

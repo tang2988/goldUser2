@@ -10,6 +10,7 @@ import java.util.List;
 import cn.jbit.Dao.AccountDao;
 import cn.jbit.Util.ConnectionUtil;
 import cn.jbit.entity.Account;
+import cn.jbit.entity.Address;
 import cn.jbit.entity.User;
 
 public class AccountDaoImpl implements AccountDao{
@@ -27,14 +28,14 @@ public class AccountDaoImpl implements AccountDao{
 			while(rs.next()){
 					ac = new Account();
 				ac.setAccountId(rs.getLong("accountId"));
-				ac.setTotalAssets(rs.getLong("TotalAssets"));
-				ac.setAccumulatedIncome(rs.getInt("AccumulatedIncome"));
-				ac.setFrozenCapital(rs.getLong("FrozenCapital"));
-				ac.setFrostgold(rs.getLong("Frostgold"));
-				ac.setAccountbalance(rs.getLong("Accountbalance"));
-				ac.setGoldgrammage(rs.getInt("Goldgrammage"));
-				ac.setGoldpresentvalue(rs.getInt("Goldpresentvalue"));
-				ac.setAccountStatusl(rs.getInt("AccountStatus"));
+				ac.setTotalAssets(rs.getBigDecimal("TotalAssets"));
+				ac.setAccumulatedIncome(rs.getBigDecimal("AccumulatedIncome"));
+				ac.setFrozenCapital(rs.getBigDecimal("FrozenCapital"));
+				ac.setFrostgold(rs.getBigDecimal("Frostgold"));
+				ac.setAccountbalance(rs.getBigDecimal("Accountbalance"));
+				ac.setGoldgrammage(rs.getBigDecimal("Goldgrammage"));
+				ac.setGoldpresentvalue(rs.getBigDecimal("Goldpresentvalue"));
+				ac.setAccountStatus(rs.getInt("AccountStatus"));
 				ac.setUserId(rs.getLong("UserId"));
 				list.add(ac);
 			}
@@ -59,14 +60,14 @@ public class AccountDaoImpl implements AccountDao{
 			Account ac = new Account();
 			while(rs.next()){
 				ac.setUserId(rs.getLong("UserId"));
-				ac.setTotalAssets(rs.getLong("TotalAssets"));
-				ac.setAccumulatedIncome(rs.getInt("AccumulatedIncome"));
-				ac.setFrozenCapital(rs.getLong("FrozenCapital"));
-				ac.setFrostgold(rs.getLong("Frostgold"));
-				ac.setAccountbalance(rs.getLong("Accountbalance"));
-				ac.setGoldgrammage(rs.getInt("Goldgrammage"));
-				ac.setGoldpresentvalue(rs.getInt("Goldpresentvalue"));
-				ac.setAccountStatusl(rs.getInt("AccountStatus"));
+				ac.setTotalAssets(rs.getBigDecimal("TotalAssets"));
+				ac.setAccumulatedIncome(rs.getBigDecimal("AccumulatedIncome"));
+				ac.setFrozenCapital(rs.getBigDecimal("FrozenCapital"));
+				ac.setFrostgold(rs.getBigDecimal("Frostgold"));
+				ac.setAccountbalance(rs.getBigDecimal("Accountbalance"));
+				ac.setGoldgrammage(rs.getBigDecimal("Goldgrammage"));
+				ac.setGoldpresentvalue(rs.getBigDecimal("Goldpresentvalue"));
+				ac.setAccountStatus(rs.getInt("AccountStatus"));
 			}
 			ConnectionUtil.closeResource(con, ps,rs);
 			return ac;
@@ -83,7 +84,7 @@ public class AccountDaoImpl implements AccountDao{
 			PreparedStatement ps = null;
 			String sql = "UPDATE t_account SET Accountbalance =? where UserId = ?";
 			ps = con.prepareStatement(sql);
-			ps.setLong(1, account.getAccountbalance());
+			ps.setBigDecimal(1, account.getAccountbalance());
 			ps.setLong(2, account.getUserId());
 			
 			int ab = ps.executeUpdate();
@@ -97,6 +98,46 @@ public class AccountDaoImpl implements AccountDao{
 		}
 		return false;
 		
+	}
+public Account addAccount(Account account) {
+		
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			String sql = "INSERT INTO t_account"
+					+ "(TotalAssets,AccumulatedIncome,FrozenCapital,"
+					+ "Frostgold,Accountbalance,Goldgrammage,Goldpresentvalue,AccountStatus,UserId)"
+					+ "VALUES(?,?,?,?,?,?,?,?,?)";
+			ps = con.prepareStatement(sql);
+			ps.setBigDecimal(1,account.getTotalAssets());
+			ps.setBigDecimal(2,account.getAccumulatedIncome());
+			ps.setBigDecimal(3, account.getFrozenCapital());
+			ps.setBigDecimal(4,account.getFrostgold());
+			ps.setBigDecimal(5,account.getAccountbalance());
+			ps.setBigDecimal(6, account.getGoldgrammage());
+			ps.setBigDecimal(7, account.getGoldpresentvalue());
+			ps.setInt(8, account.getAccountStatus());
+			ps.setLong(9, account.getUserId());
+			int count = ps.executeUpdate();
+			
+			
+			ResultSet rs = null;
+			PreparedStatement pss = null;
+			String sql2 = "select accountId from t_account order by accountId desc limit 1";
+			pss = con.prepareStatement(sql2);
+			rs = pss.executeQuery();
+			
+			while(rs.next()){
+				account.setAccountId(rs.getLong("accountId"));
+			}
+			
+			
+			ConnectionUtil.closeResource(con, ps, null);
+			return account;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public static void main(String[] args) {

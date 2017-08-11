@@ -27,12 +27,14 @@ public class TopuprechargeServiceImpl implements TopuprechargeService{
 			Account account = accountDao.findAccount(topuprecharge.getUserId()); //调用查询方法 根据用户ID查询 
 			
 			//获取当前余额
-			Long ye = account.getAccountbalance();
+			 BigDecimal ye = account.getAccountbalance();
 			BigDecimal aa = topuprecharge.getRecharmoney();
 			Long lg = new Long(aa.longValue());
 			
+			Long lg1 = new Long(ye.longValue());
+			
 			//余额赋值
-			account.setAccountbalance(ye + lg); //当前余额+充值余额
+			account.setAccountbalance(new BigDecimal(lg1+lg)); //当前余额+充值余额
 			
 			//更新账户数据
 			Boolean bl = accountDao.JianKuan(account);

@@ -2,6 +2,7 @@ package cn.jbit.Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -41,11 +42,15 @@ public class ShoppingServlet extends HttpServlet {
 		OrderinformationService orderinformationService = new OrderinformationServiceImpl();
 		Orderinformation orderinformation = orderinformationService.findOrderById(login.getUserId());
 		
+		List<Orderinformation> list = orderinformationService.findOrderAll();
+		
+		
 		ProductinformationService ps = new ProductinformationServiceImpl();
 		Productinformation productin = ps.findProById(orderinformation.getProductId());
 		
 		request.setAttribute("orderinformation", orderinformation);
 		request.setAttribute("productin", productin);
+		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/Jsp/ShoppingOrder.jsp").forward(request, response);
 	}
 
@@ -62,19 +67,7 @@ public class ShoppingServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the POST method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+	
 	}
 
 }

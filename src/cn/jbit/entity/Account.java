@@ -1,7 +1,11 @@
 package cn.jbit.entity;
 
+import java.math.BigDecimal;
+
 public class Account {
 	
+	
+
 	/**
 	 * 账户ID
 	 */
@@ -9,17 +13,17 @@ public class Account {
 	/**
 	 * 资产总额
 	 */
-	public Long totalAssets;
+	public BigDecimal totalAssets;
 	/**
 	 * 累计收益
 	 */
-	public Integer accumulatedIncome;
-	public Long  frozenCapital;
-	public Long  frostgold;
-	public Long  accountbalance;
-	public Integer goldgrammage;
-	public Integer goldpresentvalue;
-	public Integer accountStatusl;
+	public BigDecimal accumulatedIncome;
+	public BigDecimal  frozenCapital;
+	public BigDecimal  frostgold;
+	public BigDecimal  accountbalance;
+	public BigDecimal goldgrammage;
+	public BigDecimal goldpresentvalue;
+	public Integer accountStatus;
 	public Long userId;
 	public Account() {
 	}
@@ -29,53 +33,53 @@ public class Account {
 	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
 	}
-	public Long getTotalAssets() {
+	public BigDecimal getTotalAssets() {
 		return totalAssets;
 	}
-	public void setTotalAssets(Long totalAssets) {
+	public void setTotalAssets(BigDecimal totalAssets) {
 		this.totalAssets = totalAssets;
 	}
-	public Integer getAccumulatedIncome() {
+	public BigDecimal getAccumulatedIncome() {
 		return accumulatedIncome;
 	}
-	public void setAccumulatedIncome(Integer accumulatedIncome) {
+	public void setAccumulatedIncome(BigDecimal accumulatedIncome) {
 		this.accumulatedIncome = accumulatedIncome;
 	}
-	public Long getFrozenCapital() {
+	public BigDecimal getFrozenCapital() {
 		return frozenCapital;
 	}
-	public void setFrozenCapital(Long frozenCapital) {
+	public void setFrozenCapital(BigDecimal frozenCapital) {
 		this.frozenCapital = frozenCapital;
 	}
-	public Long getFrostgold() {
+	public BigDecimal getFrostgold() {
 		return frostgold;
 	}
-	public void setFrostgold(Long frostgold) {
+	public void setFrostgold(BigDecimal frostgold) {
 		this.frostgold = frostgold;
 	}
-	public Long getAccountbalance() {
+	public BigDecimal getAccountbalance() {
 		return accountbalance;
 	}
-	public void setAccountbalance(Long accountbalance) {
+	public void setAccountbalance(BigDecimal accountbalance) {
 		this.accountbalance = accountbalance;
 	}
-	public Integer getGoldgrammage() {
+	public BigDecimal getGoldgrammage() {
 		return goldgrammage;
 	}
-	public void setGoldgrammage(Integer goldgrammage) {
+	public void setGoldgrammage(BigDecimal goldgrammage) {
 		this.goldgrammage = goldgrammage;
 	}
-	public Integer getGoldpresentvalue() {
+	public BigDecimal getGoldpresentvalue() {
 		return goldpresentvalue;
 	}
-	public void setGoldpresentvalue(Integer goldpresentvalue) {
+	public void setGoldpresentvalue(BigDecimal goldpresentvalue) {
 		this.goldpresentvalue = goldpresentvalue;
 	}
-	public Integer getAccountStatusl() {
-		return accountStatusl;
+	public Integer getAccountStatus() {
+		return accountStatus;
 	}
-	public void setAccountStatusl(Integer accountStatusl) {
-		this.accountStatusl = accountStatusl;
+	public void setAccountStatus(Integer accountStatus) {
+		this.accountStatus = accountStatus;
 	}
 	public Long getUserId() {
 		return userId;
@@ -83,19 +87,14 @@ public class Account {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	@Override
 	public String toString() {
 		return "Account [accountId=" + accountId + ", totalAssets=" + totalAssets
 				+ ", accumulatedIncome=" + accumulatedIncome + ", frozenCapital=" + frozenCapital
 				+ ", frostgold=" + frostgold + ", accountbalance=" + accountbalance
 				+ ", goldgrammage=" + goldgrammage + ", goldpresentvalue=" + goldpresentvalue
-				+ ", accountStatusl=" + accountStatusl + ", userId=" + userId + "]";
+				+ ", accountStatus=" + accountStatus + ", userId=" + userId + "]";
 	}
-
 	
 	
-		
-		
-	
-
 }
+	

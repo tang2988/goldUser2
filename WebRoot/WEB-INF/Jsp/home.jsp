@@ -29,16 +29,13 @@
 
 		<tr>
         	<td>
-            	<%@include file="123.jsp" %>
+            	<%@include file="homepage.jsp" %>
             </td>
         </tr>
 		<tr>
 			<td><table>
 					<tr>
-						<td width="20%"><input type="button" value="账户总览" /><br /> <input
-							type="button" value="黄金资产" /><br /> <input type="button"
-							value="我的订单" /><br /> <input type="button" value="资金明细" /><br />
-						</td>
+						<td><%@include file="Order.jsp" %></td>
 						<td>
 							<h2>资产总额</h2>
 							<dl>

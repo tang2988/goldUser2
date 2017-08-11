@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -94,10 +95,12 @@ public class ToppServlet extends HttpServlet {
 			String czmonery = request.getParameter("czmonery").trim();
 			String raid = request.getParameter("raid").trim();
 			
-			if(czmonery==null || czmonery.equals("")){
+			if(czmonery==null || czmonery.equals("") & raid==null || raid.equals("")){
 				response.sendRedirect("topp/top.do");
-			}else if(raid==null || raid.equals("")){
-				response.sendRedirect("topp/top.do");
+			}
+			if(!Pattern.compile("^([0-9]+)$").matcher(czmonery).find()){
+					 response.sendRedirect("topp/top.do");
+					 return;
 			}else{
 				TopuprechargeService ts = new TopuprechargeServiceImpl();
 				Topuprecharge tp = new Topuprecharge();
@@ -120,7 +123,6 @@ public class ToppServlet extends HttpServlet {
 			
 			
 		}
-
 	}
 
 }
