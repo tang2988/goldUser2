@@ -82,10 +82,11 @@ public class AccountDaoImpl implements AccountDao{
 		try {
 			Connection con = ConnectionUtil.getConnection();
 			PreparedStatement ps = null;
-			String sql = "UPDATE t_account SET Accountbalance =? where UserId = ?";
+			String sql = "UPDATE t_account SET Accountbalance =?,FrozenCapital=? where UserId = ?";
 			ps = con.prepareStatement(sql);
 			ps.setBigDecimal(1, account.getAccountbalance());
-			ps.setLong(2, account.getUserId());
+			ps.setBigDecimal(2, account.getFrozenCapital());
+			ps.setLong(3, account.getUserId());
 			
 			int ab = ps.executeUpdate();
 			ConnectionUtil.closeResource(con, ps, null);
@@ -139,6 +140,23 @@ public Account addAccount(Account account) {
 		}
 		return null;
 	}
+	public Integer updateFrozenCapital(Account account) {
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			String sql = "update t_account SET FrozenCapital= ? WHERE UserId = ?";
+			ps = con.prepareStatement(sql);
+			ps.setBigDecimal(1, account.getFrozenCapital());
+			ps.setLong(2, account.getUserId());
+			int count = ps.executeUpdate();
+			ConnectionUtil.closeResource(con, ps, null);
+			return count;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	
 	public static void main(String[] args) {
 		AccountDao accountDao = new AccountDaoImpl(); 

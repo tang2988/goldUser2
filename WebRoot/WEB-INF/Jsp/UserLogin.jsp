@@ -62,9 +62,21 @@ $().ready(function() {
 
 <body>
 	<form action="userlogin/userlogin.do" method="post" id="myform">
-		<table width="750" align="center" border="1">
-			<tr>
-				<td ><table>
+		<table width=>
+		<tr>
+		<td><%@include file="/WEB-INF/Jsp/include/Daohang.jsp"%></td>
+
+		</tr>
+
+		<tr>
+			<td></td>
+		</tr>
+
+		<tr>
+		
+						<td>
+							<!-- 内容 -->
+							<table align="center">
 						<tr>
 							<td colspan="2"></td>
 							<td >没有账户?<a href="userlogin/Register.do">立即注册</td>
@@ -86,12 +98,21 @@ $().ready(function() {
 							<td><input type="submit" value="登录"></td>
 
 						</tr>
-						<td><hr></td>
+						
 
-					</table></td>
-			</tr>
+					</table>
+							 <!-- 结尾 -->
+						</td>
+				
 
-		</table>
+		</tr>
+
+		<tr>
+			<td><img src="img/Yejiao.png" /></td>
+		</tr>
+
+
+	</table>
 	</form>
 </body>
 </html>

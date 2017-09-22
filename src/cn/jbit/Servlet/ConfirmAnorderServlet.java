@@ -46,10 +46,12 @@ public class ConfirmAnorderServlet extends HttpServlet {
 			return;
 		}
 		String url = request.getRequestURI();
+		OrderinformationService os = new OrderinformationServiceImpl();
+		String orderId = request.getParameter("orderId");
 		if (url.endsWith("/Pay.do")) {
-			String orderId = request.getParameter("orderId");
+			
 
-			OrderinformationService os = new OrderinformationServiceImpl();
+			
 			Orderinformation orderinformation = os.findOrderById(login.getUserId(),
 					Long.valueOf(orderId));
 			OrderinformationService ofs = new OrderinformationServiceImpl();
@@ -57,7 +59,17 @@ public class ConfirmAnorderServlet extends HttpServlet {
 			
 			request.setAttribute("tx", res.getMsg());
 			request.getRequestDispatcher("/WEB-INF/Jsp/success.jsp").forward(request, response);
-		} else {
+		}else if(url.endsWith("updateShouhuo")){
+			
+			
+			Orderinformation orderinformation = new Orderinformation();
+			orderinformation.setReceivingtime(new Date());
+			orderinformation.setOrderStatus(40);
+			orderinformation.setOrderId(Long.valueOf(orderId));
+			Integer aa = os.updateShouHuo(orderinformation);
+			request.setAttribute("aa", "收货成功");
+			request.getRequestDispatcher("/WEB-INF/Jsp/success.jsp").forward(request, response);
+		}else {
 			String product = request.getParameter("product");
 			String shuliang = request.getParameter("shuliang");
 			ProductinformationService productinformationService = new ProductinformationServiceImpl();

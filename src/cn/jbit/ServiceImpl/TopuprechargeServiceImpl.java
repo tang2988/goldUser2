@@ -2,6 +2,8 @@ package cn.jbit.ServiceImpl;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import cn.jbit.Dao.AccountDao;
 import cn.jbit.Dao.TopuprechargeDao;
@@ -58,6 +60,18 @@ public class TopuprechargeServiceImpl implements TopuprechargeService{
 		tp.setUserId(1L);
 		ResBo aa = service.rechargeRecord(tp);
 		System.out.println(aa);
+	}
+
+	public List<Topuprecharge> findAll(int pageNo, int pageSize) {
+		return topuprechargeDao.findAll(pageNo, pageSize);
+	}
+
+	public Long findCount() {
+		return topuprechargeDao.findCount();
+	}
+
+	public List<Map<String, Object>> findAllaccountAndtopuprecharge(int pageno,int pageSize) {
+		return topuprechargeDao.findAllaccountAndtopuprecharge(pageno, pageSize);
 	}
 
 }

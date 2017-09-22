@@ -26,22 +26,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  
   <body>
 <form method="get" action="confirm/confirm.do">
-	<table>
-    	<tr>
-        	<td><table>
-            	<tr>
-                	<td>当前位置:<a href="#">首页</a></td><td><a href="#">黄金饰品</a></td><td><a href="#">金条</a></td>
-              		
-                </tr>
-            </table></td>
-        </tr>
+	<table width=>
+		<tr>
+		<td><%@include file="/WEB-INF/Jsp/include/Daohang.jsp"%></td>
+
+		</tr>
+
+		<tr>
+			<td></td>
+		</tr>
+
+		
         <tr>
-        	<td><table>
-            	<tr>
-                	<td><img src="QQ截图20170730232742.png" alt="zz" /></td>
-               </tr>
-            </table></td>
-            <td><table>
+        	<td><table align="center">
             
             	<tr>
                 	<td>
@@ -81,7 +78,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </tr>
             </table></td>
         </tr>
-    </table>
+
+		<tr>
+			<td><img src="img/Yejiao.png" /></td>
+		</tr>
+
+
+	</table>
 </form>
 </body>
 </html>

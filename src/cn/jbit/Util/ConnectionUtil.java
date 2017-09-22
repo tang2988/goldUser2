@@ -14,7 +14,7 @@ public class ConnectionUtil {
 			// 先注册驱动com.mysql.jdbc.Driver
 			DriverManager.registerDriver(new Driver());
 			// 获取
-			String url = "jdbc:mysql://127.0.0.1:3306/gold?useUnicode=true&characterEncoding=utf8";
+			String url = "jdbc:mysql://127.0.0.1:3306/xxh?useUnicode=true&characterEncoding=utf8";
 			java.sql.Connection conn = DriverManager.getConnection(url, "root", "root");
 			return conn;
 		} catch (SQLException e) {

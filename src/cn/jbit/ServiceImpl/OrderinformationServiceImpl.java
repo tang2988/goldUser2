@@ -93,7 +93,7 @@ public class OrderinformationServiceImpl implements OrderinformationService {
 		if (lg > my) {
 			resBo.setMsg("余额不足");
 			return resBo;
-		} else {
+		} else { 
 		}
 
 		account.setAccountbalance(new BigDecimal(my - lg)); // 当前余额
@@ -196,4 +196,32 @@ public class OrderinformationServiceImpl implements OrderinformationService {
 		return lst;
 
 	}
+
+	public Orderinformation findAllById(Long orderId) {
+		return orderinformationDao.findAllById(orderId);
+	}
+	
+	public List<Orderinformation> findAll() {
+		return orderinformationDao.findAll();
+	}
+
+	public Integer delivery(Long orderId, String distributioncompany,
+			Long trackingNumberCourierNumber) {
+		 Orderinformation order = new Orderinformation();
+		 order.setOrderId(orderId);
+		 order.setDistributioncompany(distributioncompany);
+		 order.setTrackingNumberCourierNumber(trackingNumberCourierNumber);
+		 order.setOrderStatus(30);
+		 order.setDeliverytime(new Date());
+		return orderinformationDao.delivery(order);
+	}
+
+	public Integer updateShouHuo(Orderinformation orderinformation) {
+		
+		return orderinformationDao.updateShouHuo(orderinformation );
+	}
+
+	
+
+
 }

@@ -25,8 +25,16 @@ public interface ProductinformationDao {
 	/**
 	 * 查询全部
 	 */
-	public List<Productinformation> findProductionformation();
 
+	
+	public List<Productinformation> findAllPage(int pageNo ,int pageSize);
+
+	public Integer UpdateAll(Productinformation productinformation);
+	
+	public Long procount();
+	
+	public List<Productinformation> findProductionformation();
+	
 	
 
 }

@@ -125,4 +125,104 @@
     <servlet-name>ProductinformationServlet</servlet-name>
     <url-pattern>/product/*</url-pattern>
   </servlet-mapping>
+  
+  
+     <servlet>
+   <description>分页,新闻咨询</description>
+    <servlet-name>indexServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.IndexServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>indexServlet</servlet-name>
+    <url-pattern>/index</url-pattern>
+  </servlet-mapping>
+  
+  
+       <servlet>
+   <description>平台公告</description>
+    <servlet-name>NoticeServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.NoticeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NoticeServlet</servlet-name>
+    <url-pattern>/noticed</url-pattern>
+  </servlet-mapping>
+  
+        <servlet>
+   <description>合作伙伴</description>
+    <servlet-name>AnnouncementServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.AnnouncementServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AnnouncementServlet</servlet-name>
+    <url-pattern>/announ/*</url-pattern>
+  </servlet-mapping>
+  
+  
+         <servlet>
+   <description>id</description>
+    <servlet-name>NoticeByIdServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.NoticeByIdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NoticeByIdServlet</servlet-name>
+    <url-pattern>/noticeid</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+           <servlet>
+   <description>order</description>
+    <servlet-name>OrderServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.OrderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderServlet</servlet-name>
+    <url-pattern>/order/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <description>简介,联系我们</description>
+    <servlet-name>GongGaoServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.GongGaoServlet</servlet-class>
+  </servlet>
+    <servlet-mapping>
+    <servlet-name>GongGaoServlet</servlet-name>
+    <url-pattern>/jianjie/*</url-pattern>
+  </servlet-mapping>
+
+
+           <servlet>
+   <description>media</description>
+    <servlet-name>MediaServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.MediaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MediaServlet</servlet-name>
+    <url-pattern>/media/*</url-pattern>
+  </servlet-mapping>
+  
+     <servlet>
+   <description>产品管理</description>
+    <servlet-name>ProductServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.ProductinServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductServlet</servlet-name>
+    <url-pattern>/prod/*</url-pattern>
+  </servlet-mapping>
+  
+       <servlet>
+   <description>充值提现</description>
+    <servlet-name>ToppuWithServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.ToppuWithServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ToppuWithServlet</servlet-name>
+    <url-pattern>/topwith/*</url-pattern>
+  </servlet-mapping>
+
+
+  
+ 
 </web-app>

@@ -266,7 +266,7 @@ public User findUserById(Long userId){
 	}
 	
 	public User getpassword(String password) {
-
+		
 		try {
 			Connection con = ConnectionUtil.getConnection();
 			PreparedStatement ps = null;
@@ -290,6 +290,7 @@ public User findUserById(Long userId){
 		return null;
 
 	}
+	
 	public static void main(String[] args) {
 		UserDao ud = new UserDaoImpl();
 		User user = new User();

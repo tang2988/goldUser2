@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,6 @@ import java.util.Map;
 import cn.jbit.Dao.OrderinformationDao;
 import cn.jbit.Util.ConnectionUtil;
 import cn.jbit.entity.Orderinformation;
-import cn.jbit.entity.Productinformation;
 
 public class OrderinformationDaoImpl implements OrderinformationDao {
 
@@ -59,9 +59,7 @@ public class OrderinformationDaoImpl implements OrderinformationDao {
 				orderinformation.setOrderId(rs.getLong("orderId"));
 			}
 
-			// TODO
-			// select id from xxx order by id desc limit 1
-			// orderinformation.setOrderId(orderId);
+			
 			ConnectionUtil.closeResource(con, ps, null);
 			return orderinformation;
 		} catch (SQLException e) {
@@ -279,12 +277,180 @@ public class OrderinformationDaoImpl implements OrderinformationDao {
 		return null;
 	}
 
+	
+	public List<Orderinformation> findAll(){
+		List<Orderinformation> list = new ArrayList<>();
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			String sql = "select * from t_orderinformation";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				Orderinformation order = new Orderinformation();
+				order.setOrderId(rs.getLong("orderId"));
+				order.setProductId(rs.getLong("productId"));
+				order.setQuantity(rs.getInt("quantity"));
+				order.setOrderAmount(rs.getBigDecimal("orderAmount"));
+				order.setOrderStatus(rs.getInt("orderStatus"));
+				order.setOrderTime(rs.getDate("orderTime"));
+				order.setTimeofpayment(rs.getDate("timeofpayment"));
+				order.setDeliverytime(rs.getDate("deliverytime"));
+				order.setReceivingtime(rs.getDate("receivingtime"));
+				order.setFailuretime(rs.getDate("failuretime"));
+				order.setCauseoffailure(rs.getString("causeoffailure"));
+				order.setAddressId(rs.getLong("addressId"));
+				order.setInvoiceInformation(rs.getString("invoiceInformation"));
+				order.setUserId(rs.getLong("userId"));
+				order.setDistributioncompany(rs.getString("distributioncompany"));
+				order.setTrackingNumberCourierNumber(rs.getLong("trackingNumberCourierNumber"));
+				order.setRemark(rs.getString("remark"));
+				order.setPaymentMethod(rs.getString("paymentMethod"));
+				list.add(order);
+			}
+			ConnectionUtil.closeResource(con, ps, rs);
+		}
+		 catch (SQLException e) {
+			e.printStackTrace();
+	}
+		return list;
+		
+}
+	
+	public Orderinformation findAllById(Long orderId){
+		List<Orderinformation> list = new ArrayList<Orderinformation>();
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			String sql = "select * from t_orderinformation where orderId = ?";
+			ps = con.prepareStatement(sql);
+			ps.setLong(1, orderId);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				Orderinformation order = new Orderinformation();
+				order.setOrderId(rs.getLong("orderId"));
+				order.setProductId(rs.getLong("productId"));
+				order.setQuantity(rs.getInt("quantity"));
+				order.setOrderAmount(rs.getBigDecimal("orderAmount"));
+				order.setOrderStatus(rs.getInt("orderStatus"));
+				order.setOrderTime(rs.getDate("orderTime"));
+				order.setTimeofpayment(rs.getDate("timeofpayment"));
+				order.setDeliverytime(rs.getDate("deliverytime"));
+				order.setReceivingtime(rs.getDate("receivingtime"));
+				order.setFailuretime(rs.getDate("failuretime"));
+				order.setCauseoffailure(rs.getString("causeoffailure"));
+				order.setAddressId(rs.getLong("addressId"));
+				order.setInvoiceInformation(rs.getString("invoiceInformation"));
+				order.setUserId(rs.getLong("userId"));
+				order.setDistributioncompany(rs.getString("distributioncompany"));
+				order.setTrackingNumberCourierNumber(rs.getLong("trackingNumberCourierNumber"));
+				order.setRemark(rs.getString("remark"));
+				order.setPaymentMethod(rs.getString("paymentMethod"));
+				list.add(order);
+			}
+			ConnectionUtil.closeResource(con, ps, rs);
+		}
+		 catch (SQLException e) {
+			e.printStackTrace();
+	}
+		return list.get(0);
+		
+}
+
+	public Integer delivery(Orderinformation orderinformation){
+	
+			
+			try {
+				Connection con = ConnectionUtil.getConnection();
+				PreparedStatement ps = null;
+				
+				String sql = "update t_orderinformation set orderStatus=?,deliverytime=?,distributioncompany=?,trackingNumberCourierNumber=? WHERE orderId =?";
+				
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, orderinformation.getOrderStatus());
+				ps.setTimestamp(2, new Timestamp(orderinformation.getDeliverytime().getTime()));
+				ps.setString(3, orderinformation.getDistributioncompany());
+				ps.setLong(4, orderinformation.getTrackingNumberCourierNumber());
+				ps.setLong(5, orderinformation.getOrderId());
+				int count = ps.executeUpdate();
+				
+				ConnectionUtil.closeResource(con, ps, null);
+				return count;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+	
+		return null;
+		
+	}
+	
 	public static void main(String[] args) {
 		OrderinformationDao of = new OrderinformationDaoImpl();
-		Orderinformation orderinformation = new Orderinformation();
-		OrderinformationDaoImpl od = new OrderinformationDaoImpl();
-		List<Map<String, Object>> aa = od.OrderAll(1L);
-
+		  
+		  List<Orderinformation> aa = of.findAll();
 		System.out.println(aa);
+	}
+	
+	public List<Map<String, Object>> findAll1(){
+		List<Map<String, Object>> list = new ArrayList<>();
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			String sql = "select * from t_orderinformation";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()){
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("orderId",rs.getLong("orderId"));
+				map.put("productId",rs.getLong("productId"));
+				map.put("quantity",rs.getInt("quantity"));
+				map.put("orderAmount",rs.getBigDecimal("orderAmount"));
+				map.put("orderStatus",rs.getInt("orderStatus"));
+				map.put("orderTime",rs.getDate("orderTime"));
+				map.put("timeofpayment",rs.getDate("timeofpayment"));
+				map.put("orderId",rs.getDate("deliverytime"));
+				map.put("orderId",rs.getDate("receivingtime"));
+				map.put("orderId",rs.getDate("failuretime"));
+				map.put("orderId",rs.getString("causeoffailure"));
+				map.put("orderId",rs.getLong("addressId"));
+				map.put("orderId",rs.getString("invoiceInformation"));
+				map.put("orderId",rs.getLong("userId"));
+				map.put("orderId",rs.getString("distributioncompany"));
+				map.put("orderId",rs.getLong("trackingNumberCourierNumber"));
+				map.put("orderId",rs.getString("remark"));
+				map.put("orderId",rs.getString("paymentMethod"));
+				list.add(map);
+			}
+			ConnectionUtil.closeResource(con, ps, rs);
+		}
+		 catch (SQLException e) {
+			e.printStackTrace();
+	}
+		return null;
+		
+	}
+	public Integer updateShouHuo(Orderinformation orderinformation) {
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			String sql = "UPDATE t_orderinformation SET orderStatus =? ,receivingtime=? where orderId = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, orderinformation.getOrderStatus());
+			ps.setTimestamp(2, new Timestamp(orderinformation.getReceivingtime().getTime()));
+			ps.setLong(3, orderinformation.getOrderId());
+
+			int count = ps.executeUpdate();
+			ConnectionUtil.closeResource(con, ps, null);
+			return count;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 }

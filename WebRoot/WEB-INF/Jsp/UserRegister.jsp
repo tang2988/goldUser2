@@ -66,9 +66,18 @@ $().ready(function() {
 
 <body>
 	<form action="userlogin/resgis.do" method="post" id="resgis">
-		<table width="500" align="right" border="1">
-			<tr>
-				<td><table>
+		<table width=>
+		<tr>
+		<td><%@include file="/WEB-INF/Jsp/include/Daohang.jsp"%></td>
+
+		</tr>
+
+		<tr>
+			<td></td>
+		</tr>
+
+		<tr>
+				<td><table align="center">
 						<tr>
 							<td>账号注册 → 实名 → 注册完成</td>
 						</tr>
@@ -105,7 +114,12 @@ $().ready(function() {
 					</table></td>
 			</tr>
 
-		</table>
+		<tr>
+			<td><img src="img/Yejiao.png" /></td>
+		</tr>
+
+
+	</table>
 
 	</form>
 

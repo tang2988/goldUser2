@@ -7,6 +7,7 @@ public class User {
 	public String password;
 	public String transactionPwd;
 	public String mobilePhone;
+	
 	public Integer UserStatus;
 	public String idcardNo;
 	public User() {

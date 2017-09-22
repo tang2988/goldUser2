@@ -2,6 +2,7 @@ package cn.jbit.Service;
 
 import java.util.List;
 
+import cn.jbit.entity.Orderinformation;
 import cn.jbit.entity.Productinformation;
 
 public interface ProductinformationService {
@@ -26,6 +27,16 @@ public interface ProductinformationService {
 	 * 查询全部
 	 * 
 	 */
+	
+
+	
+	public List<Productinformation> findAllPage(int pageNo ,int pageSize);
+	
+	public Integer UpdateAll(Productinformation productinformation);
+	
+	public Long procount();
+	
 	public List<Productinformation> findProductionformation();
+	
 
 }

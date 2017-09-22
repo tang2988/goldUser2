@@ -28,9 +28,35 @@ public class ProductinformationServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		ProductinformationService productinformationService = new ProductinformationServiceImpl();
+		String url = request.getRequestURI();
+		if(url.endsWith("xxh")){
+			
+			 String pageNo = request.getParameter("pageNo");
+			 String pagesize = request.getParameter("pagesize");
 		 List<Productinformation> pft = productinformationService.findProductionformation();
-		 request.setAttribute("pft", pft);
+		
+			
+			if (pageNo == null) {
+				pageNo = "1";
+			}
+
+			if (pagesize == null) {
+				pagesize = "4";
+			}
+			Long count = productinformationService.procount();
+			long pageCount = count % Integer.valueOf(pagesize) == 0 ? count
+					/ Integer.valueOf(pagesize) : count
+					/ Integer.valueOf(pagesize) + 1;
+			
+			request.setAttribute("pageCount", pageCount);
+			
+			long beginPageNo = 1;
+			long endPageNo = pageCount;
+			request.setAttribute("beginPageNo", beginPageNo);
+			request.setAttribute("endPageNo", endPageNo);
+			request.setAttribute("pft", pft);
 		 request.getRequestDispatcher("/WEB-INF/Jsp/Chanping.jsp").forward(request, response);
+		}
 	}
 
 }

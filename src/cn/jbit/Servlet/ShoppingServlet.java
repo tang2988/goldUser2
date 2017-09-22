@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONObject;
+
 import cn.jbit.Service.OrderinformationService;
 import cn.jbit.Service.ProductinformationService;
 import cn.jbit.ServiceImpl.OrderinformationServiceImpl;
@@ -44,7 +46,9 @@ public class ShoppingServlet extends HttpServlet {
 		List<Map<String, Object>> mapList = orderinformationService.OrderAll(login.getUserId());
 		
 		List<Orderinformation> list = orderinformationService.findOrderAll(login.getUserId());
-		
+/*		JSONObject json = new JSONObject();
+		json.put("list", list);
+		response.getWriter().write(json.toJSONString());*/
 		request.setAttribute("mapList", mapList);
 		request.setAttribute("list", list);
 		request.getRequestDispatcher("/WEB-INF/Jsp/ShoppingOrder.jsp").forward(request, response);

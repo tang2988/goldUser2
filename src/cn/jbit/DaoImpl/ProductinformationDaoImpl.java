@@ -1,5 +1,6 @@
 package cn.jbit.DaoImpl;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -84,7 +85,8 @@ public class ProductinformationDaoImpl implements ProductinformationDao {
 			Connection con = ConnectionUtil.getConnection();
 			PreparedStatement ps = null;
 			ResultSet rs = null;
-			String sql = "select * from t_productinformation";
+			
+			String sql = "select * from t_productinformation where productStatus = 10";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			while(rs.next()){
@@ -108,11 +110,7 @@ public class ProductinformationDaoImpl implements ProductinformationDao {
 		return null;
 	}
 	
-	public static void main(String[] args) {
-		  ProductinformationDao  pd = new ProductinformationDaoImpl();
-		   List<Productinformation> aa = pd.findProductionformation();
-		   System.out.println(aa);
-	}
+	
 
 	public Integer Update(Productinformation productinformation) {
 		try {
@@ -130,5 +128,92 @@ public class ProductinformationDaoImpl implements ProductinformationDao {
 		}
 		return null;
 	}
+	
+	public List<Productinformation> findAllPage(int pageNo ,int pageSize){
+		List<Productinformation> list = new ArrayList<Productinformation>();
+		try {
+			
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			int gongshi = pageSize*(pageNo-1);
+			String sql = " select * from t_productinformation WHERE productStatus =10 LIMIT "+gongshi +pageSize;
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				 Productinformation pf = new Productinformation();
+				pf.setProductId(rs.getLong("productId"));
+				pf.setProductType(rs.getString("productType"));
+				pf.setGramWeight(rs.getString("gramWeight"));
+				pf.setBrand(rs.getString("brand"));
+				pf.setProductPrice(rs.getBigDecimal("productPrice"));
+				pf.setBepertory(rs.getInt("bepertory"));
+				pf.setDetailpage(rs.getString("detailpage"));
+				pf.setProductName(rs.getString("productName"));
+				pf.setProductStatus(rs.getInt("productStatus"));
+				list.add(pf);
+			}	
+			ConnectionUtil.closeResource(con, ps, rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+		
+	}
+	public Integer UpdateAll(Productinformation productinformation) {
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			String sql = "update t_productinformation SET productType=?,gramWeight=?,brand=?,productPrice=?," +
+					"bepertory=?,detailpage=?,productName=?,productStatus=? " +
+					"WHERE productId = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1,productinformation.getProductType());
+			ps.setString(2, productinformation.getGramWeight());
+			ps.setString(3, productinformation.getBrand());
+			ps.setBigDecimal(4, productinformation.getProductPrice());
+			ps.setInt(5, productinformation.getBepertory());
+			ps.setString(6, productinformation.getDetailpage());
+			ps.setString(7, productinformation.getProductName());
+			ps.setInt(8, productinformation.getProductStatus());
+			ps.setLong(9, productinformation.getProductId());
+		
+			int count = ps.executeUpdate();
+			ConnectionUtil.closeResource(con, ps, null);
+			return count;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public Long procount() {
+		
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			String sql = "select count(1) from t_productinformation";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			Long count = 0L;
+			while(rs.next()){
+				 count = rs.getLong("count(1)");
+			}
+			ConnectionUtil.closeResource(con, ps, rs);
+			return count;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public static void main(String[] args) {
+		
+	
+
+	 
+	}
+
+
 
 }

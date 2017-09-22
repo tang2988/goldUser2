@@ -23,6 +23,16 @@ public interface OrderinformationDao {
 	
 	public List<Map<String, Object>> OrderAll(Long UserId);
 	
+	public Orderinformation findAllById(Long orderId);
+	
+	public List<Orderinformation> findAll();
+	
+	public Integer delivery(Orderinformation orderinformation);
+	
+	public List<Map<String, Object>> findAll1();
+	
+	
+	public Integer updateShouHuo(Orderinformation orderinformation);
 	
 	
 	

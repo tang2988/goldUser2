@@ -1,5 +1,6 @@
 package cn.jbit.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,5 +26,15 @@ public interface OrderinformationService {
 	public List<Orderinformation> findOrderAll(Long UserId);
 	
 	public List<Map<String, Object>> OrderAll(Long UserId);
+	
+	
+	
+	public Orderinformation findAllById(Long orderId);
+	
+	public List<Orderinformation> findAll();
+	
+	public Integer delivery(Long orderId, String distributioncompany,Long trackingNumberCourierNumber);
+	
+	public Integer updateShouHuo(Orderinformation orderinformation);
 
 }

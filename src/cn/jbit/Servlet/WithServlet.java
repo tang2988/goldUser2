@@ -50,7 +50,8 @@ public class WithServlet extends HttpServlet {
 		AccountService ac = new AccountServiceImpl();
 		Account cx = ac.findAccount(login.getUserId());
 		request.setAttribute("cx", cx);
-		request.getRequestDispatcher("/WEB-INF/Jsp/With.jsp").forward(request, response); // 页面转发
+		request.getRequestDispatcher("/WEB-INF/Jsp/With.jsp").forward(request,
+				response); // 页面转发
 	}
 
 	/**
@@ -74,38 +75,37 @@ public class WithServlet extends HttpServlet {
 		String ul = request.getRequestURI(); // 自定义路径
 		if (ul.endsWith("tixian.do")) {
 
-			User login = (User) request.getSession().getAttribute("login");	//登陸
+			User login = (User) request.getSession().getAttribute("login"); // 登陸
 			if (login == null) {
 				response.sendRedirect("../userlogin/login.do");
 				return;
 			}
 
-			
-			
-			String czmonery = request.getParameter("czmonery"); //获取表单组件名称提交的数据
-			String passwordjy = request.getParameter("passwordjy");//获取表单组件名称提交的数据
-			if (czmonery == null || czmonery.equals("") ) {
+			String czmonery = request.getParameter("czmonery"); // 获取表单组件名称提交的数据
+			String passwordjy = request.getParameter("passwordjy");// 获取表单组件名称提交的数据
+			if (czmonery == null || czmonery.equals("")) {
 				response.sendRedirect("withtx/tixian.do");
-			}else if(passwordjy == null || passwordjy.equals("")){
+			} else if (passwordjy == null || passwordjy.equals("")) {
 				response.sendRedirect("withtx/tixian.do");
 			}
-			if(!Pattern.compile("^([0-9]+)$").matcher(czmonery).find()){
-				 response.sendRedirect("withtx/tixian.do");
-				 return;
-			}else {
-				WithdrawalformService service = new WithdrawalformServiceImpl(); //实例化业务类
+			if (!Pattern.compile("^([0-9]+)$").matcher(czmonery).find()) {
+				response.sendRedirect("withtx/tixian.do");
+				return;
+			} else {
+				WithdrawalformService service = new WithdrawalformServiceImpl(); // 实例化业务类
 
 				Withdrawalform wf = new Withdrawalform();
 				wf.setApplyfortime(new Date());
 				wf.setRechargeStatus(10);
-				wf.setSucceedtime(new Date());
+
 				wf.setUserId(login.getUserId());
 				wf.setWithdrawdMoneny(new BigDecimal(czmonery));
-				wf.setErrortime(new Date());
+
 				ResBo tx = service.insert(wf);
 				if (tx.getMsg() != null) {
 					request.setAttribute("tx", tx.getMsg());
-					request.getRequestDispatcher("/WEB-INF/Jsp/success.jsp").forward(request, response);
+					request.getRequestDispatcher("/WEB-INF/Jsp/success.jsp")
+							.forward(request, response);
 				} else {
 					response.sendRedirect("withtx/tixian.do");
 				}

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSONObject;
+
 import cn.jbit.Service.AccountService;
 import cn.jbit.Service.BanklistService;
 import cn.jbit.Service.TopuprechargeService;
@@ -103,14 +105,14 @@ public class ToppServlet extends HttpServlet {
 			if(!Pattern.compile("^([0-9]+|[0-9]{1,3}(,[0-9]{3})*)(.[0-9]{1,2})?$").matcher(czmonery).find()){
 					 response.sendRedirect("topp/top.do");
 					 return;
-			}else{
+			}
+			
+			
+			else{
 				TopuprechargeService ts = new TopuprechargeServiceImpl();
 				Topuprecharge tp = new Topuprecharge();
-				tp.setErrorTime(new Date());
 				tp.setRechargeStatus(10);
 				tp.setRechargeTime(new Date());
-				tp.setSucceedTime(new Date());
-			
 				tp.setRecharmoney(new BigDecimal(czmonery));
 				
 				tp.setBanklistId(Long.valueOf(raid));
@@ -124,9 +126,9 @@ public class ToppServlet extends HttpServlet {
 					response.sendRedirect("topp/top.do");
 				}
 			}
-			
-			
+
 		}
+		
 	}
 
 }

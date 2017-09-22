@@ -74,7 +74,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                        	<c:if test="${map.orderStatusStr=='下单成功'}">
 	                        		<a href="confirm/Pay.do?orderId=${map.orderId}">去支付</a>
 	                        	</c:if>
-	                        	
+	                        	<c:if test="${map.orderStatusStr=='已发货'}">
+	                        		<a href="confirm/updateShouhuo?orderId=${map.orderId}">确认收货</a>
+	                        	</c:if>
 	                        	 <!-- <br/><a href="#">取消订单</a> --></td>
 	                        </tr>
 	                    </table></td>
