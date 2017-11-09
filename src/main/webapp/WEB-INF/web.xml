@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.0"
-    xmlns="http://java.sun.com/xml/ns/javaee"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <servlet>
-  	<description>登录</description>
+    <description>登录</description>
     <servlet-name>UserLogin</servlet-name>
     <servlet-class>cn.jbit.Servlet.UserLoginServlet</servlet-class>
   </servlet>
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>UserLogin</servlet-name>
     <url-pattern>/userlogin/*</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-  <description>个人首页</description>
+    <description>个人首页</description>
     <servlet-name>HomeServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.HomeServlet</servlet-class>
   </servlet>
@@ -22,8 +18,7 @@
     <servlet-name>HomeServlet</servlet-name>
     <url-pattern>/home/*</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
+  <servlet>
     <description>实名</description>
     <servlet-name>UserRealnameServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.UserRealnameServlet</servlet-class>
@@ -32,8 +27,7 @@
     <servlet-name>UserRealnameServlet</servlet-name>
     <url-pattern>/userRealname/*</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
+  <servlet>
     <description>密码设置</description>
     <servlet-name>UserpwdServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.UserpwdServlet</servlet-class>
@@ -42,19 +36,17 @@
     <servlet-name>UserpwdServlet</servlet-name>
     <url-pattern>/userpwd/*</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description>添加银行卡</description>
     <servlet-name>UserCardServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.UserCardServlet</servlet-class>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>UserCardServlet</servlet-name>
     <url-pattern>/usercard/*</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
-     <description>提现</description>
+  <servlet>
+    <description>提现</description>
     <servlet-name>WithServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.WithServlet</servlet-class>
   </servlet>
@@ -62,9 +54,8 @@
     <servlet-name>WithServlet</servlet-name>
     <url-pattern>/withtx/*</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-     <description>充值</description>
+    <description>充值</description>
     <servlet-name>ToppServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.ToppServlet</servlet-class>
   </servlet>
@@ -72,9 +63,8 @@
     <servlet-name>ToppServlet</servlet-name>
     <url-pattern>/topp/*</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
-    	<description>详情页</description>
+  <servlet>
+    <description>详情页</description>
     <servlet-name>DetailPageServle</servlet-name>
     <servlet-class>cn.jbit.Servlet.DetailPageServle</servlet-class>
   </servlet>
@@ -82,10 +72,8 @@
     <servlet-name>DetailPageServle</servlet-name>
     <url-pattern>/detail/*</url-pattern>
   </servlet-mapping>
-  
-  
-      <servlet>
-    	<description>购物订单</description>
+  <servlet>
+    <description>购物订单</description>
     <servlet-name>ShoppingServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.ShoppingServlet</servlet-class>
   </servlet>
@@ -93,10 +81,8 @@
     <servlet-name>ShoppingServlet</servlet-name>
     <url-pattern>/shopping/*</url-pattern>
   </servlet-mapping>
-  
-  
-      <servlet>
-    	<description>确认订单</description>
+  <servlet>
+    <description>确认订单</description>
     <servlet-name>ConfirmAnorder</servlet-name>
     <servlet-class>cn.jbit.Servlet.ConfirmAnorderServlet</servlet-class>
   </servlet>
@@ -104,20 +90,17 @@
     <servlet-name>ConfirmAnorder</servlet-name>
     <url-pattern>/confirm/*</url-pattern>
   </servlet-mapping>
-  
-      <servlet>
-    	<description>订单详情</description>
+  <servlet>
+    <description>订单详情</description>
     <servlet-name>LineitemServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.LineitemServlet</servlet-class>
   </servlet>
- 
   <servlet-mapping>
     <servlet-name>LineitemServlet</servlet-name>
     <url-pattern>/lineitem/*</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
-   <description>产品</description>
+  <servlet>
+    <description>产品</description>
     <servlet-name>ProductinformationServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.ProductinformationServlet</servlet-class>
   </servlet>
@@ -125,10 +108,8 @@
     <servlet-name>ProductinformationServlet</servlet-name>
     <url-pattern>/product/*</url-pattern>
   </servlet-mapping>
-  
-  
-     <servlet>
-   <description>分页,新闻咨询</description>
+  <servlet>
+    <description>分页,新闻咨询</description>
     <servlet-name>indexServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.IndexServlet</servlet-class>
   </servlet>
@@ -136,10 +117,8 @@
     <servlet-name>indexServlet</servlet-name>
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
-  
-  
-       <servlet>
-   <description>平台公告</description>
+  <servlet>
+    <description>平台公告</description>
     <servlet-name>NoticeServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.NoticeServlet</servlet-class>
   </servlet>
@@ -147,9 +126,8 @@
     <servlet-name>NoticeServlet</servlet-name>
     <url-pattern>/noticed</url-pattern>
   </servlet-mapping>
-  
-        <servlet>
-   <description>合作伙伴</description>
+  <servlet>
+    <description>合作伙伴</description>
     <servlet-name>AnnouncementServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.AnnouncementServlet</servlet-class>
   </servlet>
@@ -157,10 +135,8 @@
     <servlet-name>AnnouncementServlet</servlet-name>
     <url-pattern>/announ/*</url-pattern>
   </servlet-mapping>
-  
-  
-         <servlet>
-   <description>id</description>
+  <servlet>
+    <description>id</description>
     <servlet-name>NoticeByIdServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.NoticeByIdServlet</servlet-class>
   </servlet>
@@ -168,11 +144,8 @@
     <servlet-name>NoticeByIdServlet</servlet-name>
     <url-pattern>/noticeid</url-pattern>
   </servlet-mapping>
-  
-  
-  
-           <servlet>
-   <description>order</description>
+  <servlet>
+    <description>order</description>
     <servlet-name>OrderServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.OrderServlet</servlet-class>
   </servlet>
@@ -180,20 +153,17 @@
     <servlet-name>OrderServlet</servlet-name>
     <url-pattern>/order/*</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <description>简介,联系我们</description>
     <servlet-name>GongGaoServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.GongGaoServlet</servlet-class>
   </servlet>
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>GongGaoServlet</servlet-name>
     <url-pattern>/jianjie/*</url-pattern>
   </servlet-mapping>
-
-
-           <servlet>
-   <description>media</description>
+  <servlet>
+    <description>media</description>
     <servlet-name>MediaServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.MediaServlet</servlet-class>
   </servlet>
@@ -201,9 +171,8 @@
     <servlet-name>MediaServlet</servlet-name>
     <url-pattern>/media/*</url-pattern>
   </servlet-mapping>
-  
-     <servlet>
-   <description>产品管理</description>
+  <servlet>
+    <description>产品管理</description>
     <servlet-name>ProductServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.ProductinServlet</servlet-class>
   </servlet>
@@ -211,9 +180,8 @@
     <servlet-name>ProductServlet</servlet-name>
     <url-pattern>/prod/*</url-pattern>
   </servlet-mapping>
-  
-       <servlet>
-   <description>充值提现</description>
+  <servlet>
+    <description>充值提现</description>
     <servlet-name>ToppuWithServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.ToppuWithServlet</servlet-class>
   </servlet>
@@ -221,15 +189,9 @@
     <servlet-name>ToppuWithServlet</servlet-name>
     <url-pattern>/topwith/*</url-pattern>
   </servlet-mapping>
-
-
-  
-  
-<servlet>
-   <description>time</description>
+  <servlet>
+    <description>time</description>
     <servlet-name>TimeTaskServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.TimeTaskServlet</servlet-class>
   </servlet>
-  
- 
 </web-app>
