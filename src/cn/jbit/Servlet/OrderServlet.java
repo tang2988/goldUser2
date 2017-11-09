@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cn.jbit.Service.OrderinformationService;
 import cn.jbit.ServiceImpl.OrderinformationServiceImpl;
+import cn.jbit.base.ResBo;
 import cn.jbit.entity.Orderinformation;
 
 import com.alibaba.fastjson.JSONObject;
@@ -56,8 +57,8 @@ public class OrderServlet extends HttpServlet {
 			String distributioncompany = request.getParameter("distributioncompany");
 			String trackingNumberCourierNumber = request.getParameter("trackingNumberCourierNumber");
 			//http://localhost:8080/goldUser2/order/delivery.do？orderId=1&distributioncompany=圆通&trackingNumberCourierNumber=123
-			Integer order = orderinformationService.delivery(Long.valueOf(orderId) , distributioncompany, Long.valueOf(trackingNumberCourierNumber));
-			if(order>0){
+			 ResBo order = orderinformationService.delivery(Long.valueOf(orderId) , distributioncompany, Long.valueOf(trackingNumberCourierNumber));
+			if(order.isSuccess()==true){
 				 JSONObject jsonObject = new JSONObject();
 				 jsonObject.put("isOk", true);
 				 jsonObject.put("msg", "发货成功");
@@ -77,6 +78,29 @@ public class OrderServlet extends HttpServlet {
 			 JSONObject jsonObject = new JSONObject();
 			 jsonObject.put("order", order);
 			 response.getWriter().write(jsonObject.toJSONString());
+		}else if(url.endsWith("ReturnGoods.do")){
+			Orderinformation orderinformation = new Orderinformation();
+			String orderId = request.getParameter("orderId");
+			
+			orderinformation.setOrderId(Long.valueOf(orderId));
+			
+			
+			ResBo returnOfgoods = orderinformationService.ReturnOfGoods(orderinformation);
+			if(returnOfgoods.isSuccess()){
+				JSONObject jsonObject  = new JSONObject();
+				jsonObject.put("success",false);
+				jsonObject.put("error","退货失败1");
+				response.getWriter().write(jsonObject.toJSONString());
+			}else{
+				JSONObject jsonObject  = new JSONObject();
+				jsonObject.put("success",true);
+				jsonObject.put("error","退货成功");
+				response.getWriter().write(jsonObject.toJSONString());
+				
+				
+			}
+			
+			
 		}
 	}
 }

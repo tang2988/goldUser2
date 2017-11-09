@@ -20,5 +20,7 @@ public interface TopuprechargeService {
 	public Long findCount();
 	
 	public List<Map<String, Object>> findAllaccountAndtopuprecharge(int pageno,int pageSize);
+	
+	public Integer updateStatusAndTime(Topuprecharge topuprecharge);
 
 }

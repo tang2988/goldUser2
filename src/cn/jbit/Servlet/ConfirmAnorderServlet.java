@@ -66,9 +66,17 @@ public class ConfirmAnorderServlet extends HttpServlet {
 			orderinformation.setReceivingtime(new Date());
 			orderinformation.setOrderStatus(40);
 			orderinformation.setOrderId(Long.valueOf(orderId));
-			Integer aa = os.updateShouHuo(orderinformation);
+			 ResBo aa = os.updateShouHuo(orderinformation);
 			request.setAttribute("aa", "收货成功");
 			request.getRequestDispatcher("/WEB-INF/Jsp/success.jsp").forward(request, response);
+		}else if(url.endsWith("updateTuihuo")){
+			
+			Orderinformation orderinformation = new Orderinformation();
+			orderinformation.setOrderId(Long.valueOf(orderId));
+			ResBo tuihuo = os.ReturnOfGoodsSixty(orderinformation);
+			request.setAttribute("tuihuo",tuihuo.getMsg());
+			request.getRequestDispatcher("/WEB-INF/Jsp/success.jsp").forward(request, response);
+			
 		}else {
 			String product = request.getParameter("product");
 			String shuliang = request.getParameter("shuliang");
@@ -142,6 +150,8 @@ public class ConfirmAnorderServlet extends HttpServlet {
 			name = new String(name.getBytes("iso-8859-1"), "utf-8");
 			address = new String(address.getBytes("iso-8859-1"), "utf-8");
 			select = new String(select.getBytes("iso-8859-1"), "utf-8");
+			fapiao = new String(fapiao.getBytes("iso-8859-1"), "utf-8");
+			Beizhu = new String(Beizhu.getBytes("iso-8859-1"), "utf-8");
 			if (name == null || name.equals("") & mobliPhone == null || mobliPhone.equals("")) {
 				response.sendRedirect("confirm/confirm.do");
 			}

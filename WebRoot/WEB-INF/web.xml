@@ -224,5 +224,12 @@
 
 
   
+  
+<servlet>
+   <description>time</description>
+    <servlet-name>TimeTaskServlet</servlet-name>
+    <servlet-class>cn.jbit.Servlet.TimeTaskServlet</servlet-class>
+  </servlet>
+  
  
 </web-app>

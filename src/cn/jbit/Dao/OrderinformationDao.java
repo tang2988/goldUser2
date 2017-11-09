@@ -34,6 +34,16 @@ public interface OrderinformationDao {
 	
 	public Integer updateShouHuo(Orderinformation orderinformation);
 	
+	public Integer ReturnOfGoods(Orderinformation orderinformation);
+	
+	public Orderinformation OrderById(Long orderId);
+	
+	public Integer ReturnOfGoodsSixty(Orderinformation orderinformation);
+	
+	public Integer CancellationOfOrder(Orderinformation orderinformation);
+
+	public Integer Thesystemorderisinvalid(Orderinformation orderinformation);
+
 	
 	
 }

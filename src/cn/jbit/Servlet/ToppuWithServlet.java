@@ -65,7 +65,7 @@ public class ToppuWithServlet extends HttpServlet {
 		}else if(uri.endsWith("updateStatusSuccesstime")){
 			String withdrawalId = request.getParameter("withdrawalId");
 			String  rechargeStatus = request.getParameter("rechargeStatus");
-			 Integer up = ws.updatestatusbysuccesstime(Long.valueOf(withdrawalId), Integer.valueOf(rechargeStatus), new Date());
+			  Integer up = ws.updatestatusbysuccesstime(Long.valueOf(withdrawalId), Integer.valueOf(rechargeStatus), new Date());
 			 JSONObject json = new JSONObject();
 			 response.getWriter().write(json.toJSONString());
 			

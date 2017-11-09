@@ -16,4 +16,6 @@ public interface AccountDao {
 	
 	public Account addAccount(Account account);
 	
+	public Boolean TopCZ(Account account);
+	
 }

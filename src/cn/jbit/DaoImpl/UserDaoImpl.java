@@ -76,16 +76,12 @@ public User findUserById(Long userId){
 			Connection con = ConnectionUtil.getConnection();
 			PreparedStatement ps = null;
 			
-			String sql = "INSERT INTO t_user "
-					+ "(RealName,Password,transactionPwd,mobilePhone,UserStatus,idcardNo)values"
-					+ "(?,?,?,?,?,?)";
+			String sql = "INSERT INTO t_user (password,mobilePhone,userStatus)VALUES(?,?,?)";
 			ps = con.prepareStatement(sql);
-			ps.setString(1, user.getRealName());
-			ps.setString(2, user.getPassword());
-			ps.setString(3, user.getTransactionPwd());
-			ps.setString(4, user.getMobilePhone());
-			ps.setInt(5, user.getUserStatus());
-			ps.setString(6, user.getIdcardNo());
+			ps.setString(1, user.getPassword());
+			ps.setString(2, user.getMobilePhone());
+			ps.setInt(3, user.getUserStatus());
+			
 			int zc = ps.executeUpdate();
 			
 			ResultSet rs = null;
@@ -96,7 +92,7 @@ public User findUserById(Long userId){
 			while(rs.next()){
 				user.setUserId(rs.getLong("UserId"));
 			}
-			ConnectionUtil.closeResource(con, ps, null);
+			ConnectionUtil.closeResource(con, ps, rs);
 			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -294,9 +290,10 @@ public User findUserById(Long userId){
 	public static void main(String[] args) {
 		UserDao ud = new UserDaoImpl();
 		User user = new User();
-		user.setUserId(2L);
-		
-		 User aa = ud.findPassword(2L);
+		user.setPassword("123123123");
+		user.setMobilePhone("123123123123");
+		user.setUserStatus(10);
+		 User aa = ud.Zhuce(user);
 		 
 System.out.println(aa);
 	}

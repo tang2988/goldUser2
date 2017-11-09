@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ public class TopuprechargeDaoImpl implements TopuprechargeDao {
 		
 		try {
 			Connection con = ConnectionUtil.getConnection();
+			
 			PreparedStatement ps = null;
 			String sql = "INSERT INTO t_topuprecharge "
 					+ "(recharmoney,UserId,rechargeTime,rechargeStatus,banklistId) "
@@ -35,11 +37,11 @@ public class TopuprechargeDaoImpl implements TopuprechargeDao {
 			
 			ResultSet rs = null;
 			PreparedStatement pss = null;
-			String sql2 = "select banklistId from t_topuprecharge order by banklistId desc limit 1";
+			String sql2 = "select rechargeId from t_topuprecharge order by rechargeId desc limit 1";
 			pss = con.prepareStatement(sql2);
 			rs = pss.executeQuery();
 			while(rs.next()){
-				topuprecharge.setBanklistId(rs.getLong("banklistId"));
+				topuprecharge.setRechargeId(rs.getLong("rechargeId"));
 			}
 			ConnectionUtil.closeResource(con, ps, null);
 			return topuprecharge;	
@@ -143,11 +145,53 @@ public class TopuprechargeDaoImpl implements TopuprechargeDao {
 		return list;
 	}
 
-	public static void main(String[] args) {
+
+
+	public Integer updateStatusAndTime(Topuprecharge topuprecharge) {
+	
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			String sql = "update  t_topuprecharge SET errorTime =?,rechargeStatus=? where rechargeId=?";
+			ps = con.prepareStatement(sql);
+			ps.setTimestamp(1, new Timestamp(topuprecharge.getErrorTime().getTime()));
+			ps.setInt(2, topuprecharge.getRechargeStatus());
+			ps.setLong(3, topuprecharge.getRechargeId());
+			int statusandtime = ps.executeUpdate();
+			ConnectionUtil.closeResource(con, ps, null);
+			return statusandtime;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public Integer StatusAndTime(Topuprecharge topuprecharge) {
 		
-		TopuprechargeDao dao = new TopuprechargeDaoImpl();
-		  List<Topuprecharge> aa = dao.findAll(1, 2);
-		 System.out.println(aa);
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			String sql = "update  t_topuprecharge SET succeedTime =?,rechargeStatus=? where rechargeId=?";
+			ps = con.prepareStatement(sql);
+			ps.setTimestamp(1, new Timestamp(topuprecharge.getSucceedTime().getTime()));
+			ps.setInt(2, topuprecharge.getRechargeStatus());
+			ps.setLong(3, topuprecharge.getRechargeId());
+			int statusandtime = ps.executeUpdate();
+			ConnectionUtil.closeResource(con, ps, null);
+			return statusandtime;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public static void main(String[] args) {
+		Topuprecharge topuprecharge = new Topuprecharge();
+		TopuprechargeDao a = new TopuprechargeDaoImpl();
+		topuprecharge.setErrorTime(new Date());
+		topuprecharge.setRechargeStatus(10);
+		topuprecharge.setRechargeId(74L);
+		Integer aa = a.updateStatusAndTime(topuprecharge);
+		System.out.println(aa);
 	}
 
 }

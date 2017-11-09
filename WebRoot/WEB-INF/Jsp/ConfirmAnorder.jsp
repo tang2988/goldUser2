@@ -21,7 +21,38 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 
   </head>
-  
+<script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+<script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+<script
+	src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<script>
+
+$.validator.setDefaults({       
+    submitHandler: function(form) {    
+        form.submit();    
+   }      
+});
+
+$().ready(function() {
+    jQuery.validator.addMethod("mobliPhone", function(value, element) { 
+    	var mobliPhone = /^(((13[0-9]{1})|(15[0-9]{1}))+\d{8})$/;
+    	return mobliePhone.test(value); 
+    	},"手机号码格式错误");
+    
+    
+    $("form").validate({
+    	rules: { 
+    		mobliPhone:{
+    			
+    			mobliPhone:true,
+    		        }
+    		       
+    	},
+    });
+});
+</script>
  <body>
 <h1 align="center">确认订单信息</h1>
 <form action="confirm/confirm.do" method="post">
@@ -53,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	<h3>收货人信息</h3>
         	<tr>
             	<td><input type="text" name="name" placeholder="收件人名称"/></td>
-                <td><input type=text name="mobliPhone" placeholder="收件人电话" /></td>
+                <td><input type=text name="mobliPhone" placeholder="收件人电话"  id="mobliPhone"  maxlength="11"/></td>
                 <td><select name="select">
                 <option>广东深圳</option>
                 <option>广东非洲</option></select></td>
@@ -93,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<td>寄送至:${ad.userName}</td>
                 <td>${ad.mobilePhone}</td>
                 <td>${ad.twelveProvincesAndcities}${ad.detailedAddressStreet}</td>
-                <td>运费<br/>加工费:0元<br/>商品金额：269.08元<br/>应付总额:元</td>
+                <td>运费<br/>加工费:0元<br/>商品金额：${totalPrice}元<br/>应付总额:元</td>
             </tr>
         </table></td>
     </tr>

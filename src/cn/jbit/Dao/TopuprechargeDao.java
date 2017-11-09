@@ -15,6 +15,8 @@ public interface TopuprechargeDao {
 	
 	public List<Map<String, Object>> findAllaccountAndtopuprecharge(int pageno,int pageSize);
 	
+	public Integer updateStatusAndTime(Topuprecharge topuprecharge);
 	
+	public Integer StatusAndTime(Topuprecharge topuprecharge);
 
 }

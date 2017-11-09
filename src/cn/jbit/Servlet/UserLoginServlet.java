@@ -109,9 +109,6 @@ public class UserLoginServlet extends HttpServlet {
 			User user = new User(); // 实例化
 			user.setMobilePhone(mobliePhone);
 			user.setPassword(Password);
-			user.setIdcardNo(null);
-			user.setRealName(null);
-			user.setTransactionPwd(null);
 			user.setUserStatus(10);
 			UserService us = new UserServiceImpl(); // 实例化业务类
 			ResBo zc = us.register(user); // 调用业务类的方法

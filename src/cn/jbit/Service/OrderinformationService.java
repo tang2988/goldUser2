@@ -33,8 +33,14 @@ public interface OrderinformationService {
 	
 	public List<Orderinformation> findAll();
 	
-	public Integer delivery(Long orderId, String distributioncompany,Long trackingNumberCourierNumber);
+	public ResBo delivery(Long orderId, String distributioncompany,Long trackingNumberCourierNumber);
 	
-	public Integer updateShouHuo(Orderinformation orderinformation);
+	public ResBo updateShouHuo(Orderinformation orderinformation);
 
+	public ResBo ReturnOfGoods(Orderinformation orderinformation);
+	
+	public ResBo ReturnOfGoodsSixty(Orderinformation orderinformation);
+	
+	public ResBo Thesystemorderisinvalid(Orderinformation orderinformation);
+	public ResBo CancellationOfOrder(Orderinformation orderinformation);
 }
