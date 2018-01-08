@@ -13,7 +13,7 @@
 	<tr>
 		<td><a href="index"><img src="img/jinshiye.png" alt="金狮爷"/></a></td>
 		<td><a href="index">首页</a></td>
-		<td><a href="#">我要买金</a></td>
+		<td><a href="productprof/productpage.do">我要买金</a></td>
 		<td><a href="product/xxh">黄金饰品</a></td>
 		<td><a href="#">安全保障</a></td>
 		<td><a href="jianjie/jianjie">关于我们</a></td>

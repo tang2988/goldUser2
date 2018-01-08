@@ -5,33 +5,38 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import cn.jbit.Dao.AccountDao;
+import cn.jbit.Dao.UserDao;
 import cn.jbit.Dao.WithdrawalformDao;
 import cn.jbit.DaoImpl.AccountDaoImpl;
+import cn.jbit.DaoImpl.UserDaoImpl;
 import cn.jbit.DaoImpl.WithdrawalformDaoImpl;
 import cn.jbit.Service.WithdrawalformService;
 import cn.jbit.base.ResBo;
 import cn.jbit.entity.Account;
+import cn.jbit.entity.User;
 import cn.jbit.entity.Withdrawalform;
 
 public class WithdrawalformServiceImpl implements WithdrawalformService {
 
 	AccountDao accountDao = new AccountDaoImpl();
 	WithdrawalformDao withdrawalformDao = new WithdrawalformDaoImpl();
-
+	UserDao dao = new UserDaoImpl();
+	
 	public ResBo insert(Withdrawalform withdrawalform) {
 		ResBo resBo = new ResBo(); // 实例化
 
-		Account account = accountDao.findAccount(withdrawalform.getUserId()); // 根据用户ID
-																				// 获取用户信息
-
-		BigDecimal dq = account.getAccountbalance(); // 获取当前余额
-		BigDecimal txx = withdrawalform.getWithdrawdMoneny(); // 获取提现余额
+		Account account = accountDao.findAccount(withdrawalform.getUserId()); // 根据用户ID查询
+		 User user = dao.findUserById(withdrawalform.getUserId());														
+		
+		BigDecimal accountbalance = account.getAccountbalance(); // 获取当前余额
+		BigDecimal withdrawdMoneny = withdrawalform.getWithdrawdMoneny(); // 获取提现余额
 		BigDecimal dongjie = account.getFrozenCapital();
-		Long dj = new Long(dongjie.longValue());
-		Long tx = new Long(txx.longValue());
-		Long yuer = new Long(dq.longValue());
-		if (yuer > tx) {
+	
+		
+		if (accountbalance.compareTo(accountbalance)>=0) {
 			resBo.setMsg("申请成功");
 
 		} else {
@@ -40,8 +45,8 @@ public class WithdrawalformServiceImpl implements WithdrawalformService {
 		}
 		Withdrawalform count = withdrawalformDao.insert(withdrawalform);
 		if (count != null) {
-			account.setAccountbalance(new BigDecimal(yuer - tx)); // 当前余额-提现余额
-			account.setFrozenCapital(new BigDecimal(tx + dj));
+			account.setAccountbalance((accountbalance.subtract(withdrawdMoneny))); // 当前余额-提现余额
+			account.setFrozenCapital((dongjie.add(withdrawdMoneny)));
 			Boolean up = accountDao.JianKuan(account);
 			if (up) {
 				resBo.setSuccess(true);
@@ -63,7 +68,7 @@ public class WithdrawalformServiceImpl implements WithdrawalformService {
 		withdrawalform.setRechargeStatus(10);
 	
 		withdrawalform.setUserId(1L);
-		withdrawalform.setWithdrawdMoneny(new BigDecimal(2000));
+		withdrawalform.setWithdrawdMoneny(new BigDecimal(100));
 		ResBo aa = service.insert(withdrawalform);
 		System.out.println(aa);
 	}

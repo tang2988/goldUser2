@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib  prefix="fm" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":"
@@ -24,7 +26,12 @@
 </head>
 
 <body>
-
+	<%-- <fm:formatDate value="${}" pattern=""/> --%>
+	<%-- <fm:formatNumber value="${}" pattern="" var></fm:formatNumber> --%>
+<%-- 	<c:out value=""></c:out>
+	<c:set></c:set>
+	<c:remove var=""/>
+	<c:redirect></c:redirect> --%>
 	<table align="center">
 
 		<tr>

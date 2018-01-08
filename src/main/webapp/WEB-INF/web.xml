@@ -109,7 +109,7 @@
     <url-pattern>/product/*</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description>分页,新闻咨询</description>
+    <description>分页,新闻咨询,稳赢金查询</description>
     <servlet-name>indexServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.IndexServlet</servlet-class>
   </servlet>
@@ -194,4 +194,38 @@
     <servlet-name>TimeTaskServlet</servlet-name>
     <servlet-class>cn.jbit.Servlet.TimeTaskServlet</servlet-class>
   </servlet>
+  
+  <servlet>
+  	<description>稳赢金订单 </description>
+  	<servlet-name>OrdersteadyprofitServlet</servlet-name>
+  	<servlet-class>cn.jbit.Servlet.OrdersteadyprofitServlet</servlet-class>
+  	
+  </servlet>
+  <servlet-mapping>
+  	
+  	<servlet-name>OrdersteadyprofitServlet</servlet-name>
+  	<url-pattern>/ordersteadyprofit/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <description>稳赢金产品</description>
+  	<servlet-name>ProductprofitandlossServlet</servlet-name>
+  	<servlet-class>cn.jbit.Servlet.ProductprofitandlossServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ProductprofitandlossServlet</servlet-name>
+  	<url-pattern>/productprof/*</url-pattern>
+  </servlet-mapping>
+  
+  <!-- <filter>
+  	<filter-name></filter-name>
+  	<filter-class></filter-class>
+  	<
+  </filter>
+  <filter-mapping>
+  	<filter-name></filter-name>
+  	<url-pattern></url-pattern>
+  </filter-mapping> -->
+
+  
 </web-app>

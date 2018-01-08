@@ -1,5 +1,7 @@
 package cn.jbit.DaoImpl;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,6 +37,50 @@ public class UserDaoImpl implements UserDao {
 			}
 			ConnectionUtil.closeResource(con, ps, rs);
 			return us;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public User login2(User user){
+		
+		try {
+			Connection con = ConnectionUtil.getConnection();
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			User  us =null;
+			String sql = "select * from t_user LIMIT 0,1";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			while(rs.next()){
+				
+				 Field[] file = user.getClass().getFields();
+				 for(Field fi:file){
+					 
+					 try {
+						fi.set(user, rs.getObject(fi.getName()));
+						
+				
+					} catch (IllegalArgumentException e) {
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						e.printStackTrace();
+					}
+					 
+					
+				 }
+				/*us = new User();
+				us.setUserId(rs.getLong("UserId"));
+				us.setRealName(rs.getString("RealName"));
+				us.setPassword(rs.getString("Password"));
+				us.setTransactionPwd(rs.getString("transactionPwd"));
+				us.setMobilePhone(rs.getString("mobilePhone"));
+				us.setUserStatus(rs.getInt("UserStatus"));
+				us.setIdcardNo(rs.getString("idcardNo"));*/
+			}
+			ConnectionUtil.closeResource(con, ps, rs);
+			return user;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -290,10 +336,10 @@ public User findUserById(Long userId){
 	public static void main(String[] args) {
 		UserDao ud = new UserDaoImpl();
 		User user = new User();
-		user.setPassword("123123123");
-		user.setMobilePhone("123123123123");
-		user.setUserStatus(10);
-		 User aa = ud.Zhuce(user);
+		/*user.setPassword("123123123");
+		user.setMobilePhone("123123123123");*/
+	
+		 User aa = ud.login2(user);
 		 
 System.out.println(aa);
 	}

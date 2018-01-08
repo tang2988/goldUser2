@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<!-- 内容 -->
 				<table align="center">
 					
-					<a href="home/home.do">返回首页</a>${xg}${uo}${tj}${tx}${cz}${aa}${tuihuo}
+					<a href="home/home.do">返回首页</a>${xg}${uo}${tj}${tx}${cz}${aa}${tuihuo}${resbo}${res}
 					
 
 

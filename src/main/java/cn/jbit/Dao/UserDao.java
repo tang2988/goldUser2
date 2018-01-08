@@ -25,6 +25,7 @@ public interface UserDao {
 	public User transactionPwd(Long uid);
 	
 	public User getpassword(String password);
+	public User login2(User user);
 	
 	
 

@@ -196,6 +196,8 @@ public class OrderinformationServiceImpl implements OrderinformationService {
 			case 60:
 				rowMap.put("orderStatusStr", "退货申请");
 				break;
+			case 70:
+				rowMap.put("orderStatusStr", "订单已经超时");
 			case 90:
 				rowMap.put("orderStatusStr", "失败");
 				break;

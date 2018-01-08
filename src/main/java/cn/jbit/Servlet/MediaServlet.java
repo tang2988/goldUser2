@@ -1,6 +1,7 @@
 package cn.jbit.Servlet;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,25 +14,28 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
+import cn.xxh.ResourcesUtil;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 public class MediaServlet extends HttpServlet {
 
-	/**
-	 * The doGet method of the servlet. <br>
-	 * 
-	 * This method is called when a form has its tag value method equals to get.
-	 * 
-	 * @param request
-	 *            the request send by the client to the server
-	 * @param response
-	 *            the response send by the server to the client
-	 * @throws ServletException
-	 *             if an error occurred
-	 * @throws IOException
-	 *             if an error occurred
-	 */
+	String consolepcUrl = "";
+
+	public void init() throws ServletException {
+
+		Properties propertie = ResourcesUtil
+				.getPropertiesFromFile("config-console-pc.properties");
+		consolepcUrl = propertie.getProperty("consolepcUrl");
+		if (consolepcUrl == null) {
+
+			throw new RuntimeException(
+					"config-console-pc.properties找不到consolepcUrl配置项");
+		}
+	}
+	
+	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -52,7 +56,7 @@ public class MediaServlet extends HttpServlet {
 			int pageNoI = Integer.valueOf(pageNo);
 			int pagesizeI = Integer.valueOf(pagesize);
 
-			String url = "http://localhost:8080/hsdgold-console-pc/mediaa/findAll";
+			String url = consolepcUrl+"mediaa/findAll";
 			CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 			HttpGet get = new HttpGet(url);
 			CloseableHttpResponse response2 = httpClient.execute(get);
@@ -79,7 +83,7 @@ public class MediaServlet extends HttpServlet {
 		} else if (uri.endsWith("findByid")) {
 
 			String mediaId = request.getParameter("mediaId");
-			String url = "http://localhost:8080/hsdgold-console-pc/mediaa/findById?mediaId="
+			String url = consolepcUrl+"mediaa/findById?mediaId="
 					+ mediaId;
 			CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 			HttpGet get = new HttpGet(url);
@@ -91,7 +95,7 @@ public class MediaServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/Jsp/medianr.jsp").forward(
 					request, response);
 		} else if (uri.endsWith("zixun")) {
-			String url = "http://localhost:8080/hsdgold-console-pc/mediaa/findAll";
+			String url = consolepcUrl+"mediaa/findAll";
 			CloseableHttpClient httpClient = HttpClientBuilder.create().build();
 			HttpGet get = new HttpGet(url);
 			CloseableHttpResponse response2 = httpClient.execute(get);

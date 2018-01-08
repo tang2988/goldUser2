@@ -1,5 +1,8 @@
 package cn.jbit.DaoImpl;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,37 +17,52 @@ import cn.jbit.entity.Address;
 import cn.jbit.entity.User;
 
 public class AccountDaoImpl implements AccountDao {
+
 	public List<Account> findUser() {
 		List<Account> list = new ArrayList<Account>();
 
 		try {
+
 			Connection con = ConnectionUtil.getConnection();
 			PreparedStatement ps = null;
 			ResultSet rs = null;
-			Account ac = null;
 			String sql = "select * from t_account";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
+
 			while (rs.next()) {
-				ac = new Account();
-				ac.setAccountId(rs.getLong("accountId"));
-				ac.setTotalAssets(rs.getBigDecimal("TotalAssets"));
-				ac.setAccumulatedIncome(rs.getBigDecimal("AccumulatedIncome"));
-				ac.setFrozenCapital(rs.getBigDecimal("FrozenCapital"));
-				ac.setFrostgold(rs.getBigDecimal("Frostgold"));
-				ac.setAccountbalance(rs.getBigDecimal("Accountbalance"));
-				ac.setGoldgrammage(rs.getBigDecimal("Goldgrammage"));
-				ac.setGoldpresentvalue(rs.getBigDecimal("Goldpresentvalue"));
-				ac.setAccountStatus(rs.getInt("AccountStatus"));
-				ac.setUserId(rs.getLong("UserId"));
+				Account ac = (Account) rsToBean(Account.class, rs);
 				list.add(ac);
 			}
+
 			ConnectionUtil.closeResource(con, ps, rs);
 			return list;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return list;
+
+		return null;
+	}
+
+	private Object rsToBean(Class clz, ResultSet rs) {
+		try {
+			Object ac = clz.getConstructor().newInstance();
+
+			Field[] fileid = clz.getFields();
+			for (Field fi : fileid) {
+				fi.set(ac, rs.getObject(fi.getName()));
+				System.out.println("设置值" + fi.getName());
+			}
+			return ac;
+
+		} catch (InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e1) {
+			e1.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public Account findAccount(Long UserId) {
@@ -82,11 +100,11 @@ public class AccountDaoImpl implements AccountDao {
 		try {
 			Connection con = ConnectionUtil.getConnection();
 			PreparedStatement ps = null;
-			String sql = "UPDATE t_account SET Accountbalance =? where UserId = ?";
+			String sql = "UPDATE t_account SET Accountbalance =?,FrozenCapital=? where UserId = ?";
 			ps = con.prepareStatement(sql);
 			ps.setBigDecimal(1, account.getAccountbalance());
-
-			ps.setLong(2, account.getUserId());
+			ps.setBigDecimal(2, account.getFrozenCapital());
+			ps.setLong(3, account.getUserId());
 
 			int ab = ps.executeUpdate();
 			ConnectionUtil.closeResource(con, ps, null);
